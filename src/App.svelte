@@ -1,180 +1,183 @@
 <script>
-    // Any form handling or state management can be added here.
 </script>
 
-<div class="p-8 max-w-2xl mx-auto border border-gray-300 rounded-lg shadow-lg">
-    <div class="text-center mb-8">
-        <h1 class="text-xl font-semibold">ARKHAM SANITARIUM</h1>
-        <h2 class="text-lg">PATIENT ADMISSION FORM</h2>
-    </div>
+<style lang="postcss">
+    .small-caps {
+        font-variant-caps: small-caps;
+    }
+</style>
 
-    <form class="space-y-6">
-        <!-- Basic Information -->
-        <div class="grid grid-cols-2 gap-4">
-            <label>
-                Name
-                <input type="text" class="border border-gray-400 rounded w-full p-2" />
-            </label>
-            <label>
-                Date of Admission
-                <input type="date" class="border border-gray-400 rounded w-full p-2" />
-            </label>
-            <label>
-                Date of Birth
-                <input type="date" class="border border-gray-400 rounded w-full p-2" />
-            </label>
-            <label>
-                Sex
-                <input type="text" class="border border-gray-400 rounded w-full p-2" />
-            </label>
-            <label>
-                Marital Status
-                <input type="text" class="border border-gray-400 rounded w-full p-2" />
-            </label>
-            <label>
-                Children
-                <input type="number" class="border border-gray-400 rounded w-full p-2" />
-            </label>
-            <label class="col-span-2">
-                Residence
-                <input type="text" class="border border-gray-400 rounded w-full p-2" />
-            </label>
-            <label>
-                Occupation
-                <input type="text" class="border border-gray-400 rounded w-full p-2" />
-            </label>
-            <label>
-                Nativity
-                <input type="text" class="border border-gray-400 rounded w-full p-2" />
-            </label>
-            <label class="col-span-2">
-                Religion
-                <input type="text" class="border border-gray-400 rounded w-full p-2" />
-            </label>
+<div class="bg-gray-400 p-10 [&_*]:font-frank-ruhl-libre small-caps">
+    <div class="bg-white p-8 max-w-2xl mx-auto border border-gray-300 rounded-lg shadow-lg">
+        <div class="text-center mb-8">
+            <h1 class="text-xl font-semibold small-caps">ENSKEDEDALEN SANITARIUM</h1>
+            <h2 class="text-lg">PATIENTINSKICKNINGSFORMULÄR</h2>
         </div>
 
-        <!-- Administration Section -->
-        <h3 class="text-lg font-semibold">ADMINISTRATION</h3>
-        <div class="grid grid-cols-2 gap-4">
-            <label>
-                Next of Kin/Guardian
-                <input type="text" class="border border-gray-400 rounded w-full p-2" />
-            </label>
-            <label>
-                Tel.
-                <input type="tel" class="border border-gray-400 rounded w-full p-2" />
-            </label>
-            <label>
-                Personal Physician
-                <input type="text" class="border border-gray-400 rounded w-full p-2" />
-            </label>
-            <label>
-                Tel.
-                <input type="tel" class="border border-gray-400 rounded w-full p-2" />
-            </label>
-            <label>
-                Agent (If any)
-                <input type="text" class="border border-gray-400 rounded w-full p-2" />
-            </label>
-            <label>
-                Tel.
-                <input type="tel" class="border border-gray-400 rounded w-full p-2" />
-            </label>
-            <label>
-                Register Number
-                <input type="text" class="border border-gray-400 rounded w-full p-2" />
-            </label>
-            <label>
-                Ward
-                <input type="text" class="border border-gray-400 rounded w-full p-2" />
-            </label>
-            <label>
-                Bed
-                <input type="text" class="border border-gray-400 rounded w-full p-2" />
-            </label>
-            <label class="col-span-2">
-                Care Note
-                <input type="text" class="border border-gray-400 rounded w-full p-2" />
-            </label>
-        </div>
+        <form class="space-y-6">
+            <div class="grid grid-cols-2 gap-4">
+                <label>
+                    Namn
+                    <input type="text" value="Erik Johansson" class="border border-gray-400 w-full p-2" readonly />
+                </label>
+                <label>
+                    Inskrivningsdatum
+                    <input type="date" value="2024-10-29" class="border border-gray-400 w-full p-2" readonly />
+                </label>
+                <label>
+                    Födelsedatum
+                    <input type="date" value="1985-04-15" class="border border-gray-400 w-full p-2" readonly />
+                </label>
+                <label>
+                    Kön
+                    <input type="text" value="Man" class="border border-gray-400 w-full p-2" readonly />
+                </label>
+                <label>
+                    Civilstånd
+                    <input type="text" value="Gift" class="border border-gray-400 w-full p-2" readonly />
+                </label>
+                <label>
+                    Barn
+                    <input type="number" value="2" class="border border-gray-400 w-full p-2" readonly />
+                </label>
+                <label class="col-span-2">
+                    Bostad
+                    <input type="text" value="Skövde, Sverige" class="border border-gray-400 w-full p-2" readonly />
+                </label>
+                <label>
+                    Yrke
+                    <input type="text" value="Ingenjör" class="border border-gray-400 w-full p-2" readonly />
+                </label>
+                <label>
+                    Födelsetal
+                    <input type="text" value="Skövde" class="border border-gray-400 w-full p-2" readonly />
+                </label>
+                <label class="col-span-2">
+                    Religion
+                    <input type="text" value="Kristen" class="border border-gray-400 w-full p-2" readonly />
+                </label>
+            </div>
 
-        <!-- History Section -->
-        <h3 class="text-lg font-semibold">HISTORY</h3>
-        <div class="space-y-4">
-            <div>
-                <label class="block font-semibold">Mode of Admission</label>
-                <div class="flex gap-4">
+            <h3 class="text-lg font-semibold">ADMINISTRATION</h3>
+            <div class="grid grid-cols-2 gap-4">
+                <label>
+                    Närstående/Vårdnadshavare
+                    <input type="text" value="Anna Johansson" class="border border-gray-400 w-full p-2" readonly />
+                </label>
+                <label>
+                    Tel.
+                    <input type="tel" value="?????" class="border border-red-400 w-full p-2" />
+                </label>
+                <label>
+                    Personlig Läkare
+                    <input type="text" value="Dr. Lars Eriksson" class="border border-gray-400 w-full p-2" readonly />
+                </label>
+                <label>
+                    Tel.
+                    <input type="tel" value="?????" class="border border-red-400 w-full p-2" />
+                </label>
+                <label>
+                    Ombud (Om något)
+                    <input type="text" value="Ingen" class="border border-gray-400 w-full p-2" readonly />
+                </label>
+                <label>
+                    Tel.
+                    <input type="tel" value="-" class="border border-gray-400 w-full p-2" readonly />
+                </label>
+                <label>
+                    Registreringsnummer
+                    <input type="text" value="123456-7890" class="border border-gray-400 w-full p-2" readonly />
+                </label>
+                <label>
+                    Avdelning
+                    <input type="text" value="Avdelning A" class="border border-gray-400 w-full p-2" readonly />
+                </label>
+                <label>
+                    Säng
+                    <input type="text" value="Säng 5" class="border border-gray-400 w-full p-2" readonly />
+                </label>
+                <label class="col-span-2">
+                    Vårdnotat
+                    <input type="text" value="Inga anmärkningar" class="border border-gray-400 w-full p-2" readonly />
+                </label>
+            </div>
+
+            <h3 class="text-lg font-semibold">HISTORIK</h3>
+            <div class="space-y-4">
+                <div>
+                    <h4 class="block font-semibold">Inskrivningssätt</h4>
+                    <div class="flex gap-4">
+                        <label>
+                            <input type="radio" name="admission_mode" value="Voluntary" class="mr-2" checked disabled />
+                            Frivillig
+                        </label>
+                        <label>
+                            <input type="radio" name="admission_mode" value="Certified" class="mr-2" disabled />
+                            Certifierad
+                        </label>
+                        <label>
+                            <input type="radio" name="admission_mode" value="Criminal" class="mr-2" disabled />
+                            Kriminalvården
+                        </label>
+                    </div>
+                </div>
+
+                <label>
+                    Överflyttning från
+                    <input type="text" value="Ingen" class="border border-gray-400 w-full p-2" readonly />
+                </label>
+
+                <div class="grid grid-cols-2 gap-4">
                     <label>
-                        <input type="radio" name="admission_mode" value="Voluntary" class="mr-2" />
-                        Voluntary
+                        Puls
+                        <input type="text" value="72" class="border border-gray-400 w-full p-2" readonly />
                     </label>
                     <label>
-                        <input type="radio" name="admission_mode" value="Certified" class="mr-2" />
-                        Certified
+                        Blodtryck
+                        <input type="text" value="120/80" class="border border-gray-400 w-full p-2" readonly />
                     </label>
                     <label>
-                        <input type="radio" name="admission_mode" value="Criminal" class="mr-2" />
-                        Criminal
+                        Andning
+                        <input type="text" value="16" class="border border-gray-400 w-full p-2" readonly />
+                    </label>
+                    <label>
+                        Temperatur
+                        <input type="text" value="37.0" class="border border-gray-400 w-full p-2" readonly />
+                    </label>
+                </div>
+
+                <label>
+                    Mentalt tillstånd vid inskrivning
+                    <textarea class="border border-gray-400 w-full p-2" readonly>Patienten uppvisar inga tecken på oro.</textarea>
+                </label>
+                <label>
+                    Antagna orsaker - Predisponerande
+                    <textarea class="border border-gray-400 w-full p-2" readonly>Ingen känd predisposition.</textarea>
+                </label>
+                <label>
+                    Utlösande
+                    <textarea class="border border-gray-400 w-full p-2" readonly>Stress och arbetsbelastning.</textarea>
+                </label>
+                <label>
+                    Fysisk kondition
+                    <textarea class="border border-gray-400 w-full p-2" readonly>Stabil och normal.</textarea>
+                </label>
+                <label>
+                    Särskilda omständigheter
+                    <textarea class="border border-gray-400 w-full p-2" readonly>Ingen särskild omständighet att notera.</textarea>
+                </label>
+
+                <div class="grid grid-cols-2 gap-4">
+                    <label>
+                        Datum för tidigare inskrivningar
+                        <input type="text" value="2020-01-10, 2022-03-15" class="border border-gray-400 w-full p-2" readonly />
+                    </label>
+                    <label>
+                        och utskrivningar
+                        <input type="text" value="2020-01-20, 2022-03-25" class="border border-gray-400 w-full p-2" readonly />
                     </label>
                 </div>
             </div>
-
-            <label>
-                Transfer from
-                <input type="text" class="border border-gray-400 rounded w-full p-2" />
-            </label>
-
-            <!-- Vital Signs -->
-            <div class="grid grid-cols-2 gap-4">
-                <label>
-                    Pulse
-                    <input type="text" class="border border-gray-400 rounded w-full p-2" />
-                </label>
-                <label>
-                    Blood Pressure
-                    <input type="text" class="border border-gray-400 rounded w-full p-2" />
-                </label>
-                <label>
-                    Respiration
-                    <input type="text" class="border border-gray-400 rounded w-full p-2" />
-                </label>
-                <label>
-                    Temperature
-                    <input type="text" class="border border-gray-400 rounded w-full p-2" />
-                </label>
-            </div>
-
-            <label>
-                Mental State on Admission
-                <textarea class="border border-gray-400 rounded w-full p-2"></textarea>
-            </label>
-            <label>
-                Supposed Causes - Predisposing
-                <textarea class="border border-gray-400 rounded w-full p-2"></textarea>
-            </label>
-            <label>
-                Exciting
-                <textarea class="border border-gray-400 rounded w-full p-2"></textarea>
-            </label>
-            <label>
-                Physical Condition
-                <textarea class="border border-gray-400 rounded w-full p-2"></textarea>
-            </label>
-            <label>
-                Special Circumstances
-                <textarea class="border border-gray-400 rounded w-full p-2"></textarea>
-            </label>
-
-            <div class="grid grid-cols-2 gap-4">
-                <label>
-                    Dates of Previous Admissions
-                    <input type="text" class="border border-gray-400 rounded w-full p-2" />
-                </label>
-                <label>
-                    and of Discharges
-                    <input type="text" class="border border-gray-400 rounded w-full p-2" />
-                </label>
-            </div>
-        </div>
-    </form>
+        </form>
+    </div>
 </div>

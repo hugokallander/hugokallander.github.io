@@ -5,8 +5,15 @@ export default {
     "./src/**/*.{svelte,js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        'frank-ruhl-libre': ['"Frank Ruhl Libre"', 'serif'],
+      },
+      // You can also add a custom utility class for small caps
+      textTransform: {
+        'small-caps': 'uppercase',
+      },
+    },
   },
   plugins: [],
 }
-
