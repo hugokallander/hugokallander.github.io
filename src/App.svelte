@@ -1,21 +1,19 @@
 <script>
     // Define predefined correct telephone numbers
-    const telGuardian = "1";//"0123456789";
-    const telDoctor = "1";//"0987654321";
-    const serviceNumber = "2304";
+    const personalNumber = "850415-8709";
+    const serviceNumber = "072 309 71 42";
 
     // Reactive variables to store input values
-    let telGuardianInput = "";
-    let telDoctorInput = "";
+    let personalNumberInput = "850415-xxxx";
     let isSubmitted = false;
 
     function validateForm() {
         // Check if the values match the predefined numbers
-        if (telGuardianInput === telGuardian && telDoctorInput === telDoctor) {
+        if (personalNumberInput === personalNumber) {
             isSubmitted = true;
             alert("Alla fält är korrekt ifyllda.");
         } else {
-            alert("Något fält är inkorrekt ifyllt.");
+            alert("Personnumret är inkorrekt.");
         }
     }
 </script>
@@ -30,18 +28,18 @@
     <div class:mt-32={isSubmitted} class="bg-white p-8 max-w-2xl mx-auto border border-gray-300 rounded-lg shadow-lg">
         {#if isSubmitted}
             <div class="text-center mb-8">
-                <h1 class="text-xl font-semibold small-caps">Tack för din inskickning!</h1>
+                <h1 class="text-xl font-semibold small-caps">Inskrivning slutförd</h1>
                 <p class="mt-4">
-                    Ditt formulär har skickats in och kommer att behandlas inom kort.
+                    Ditt formulär har skickats in.
                 </p>
                 <p class="mt-4">
-                    Ditt servicenummer är <span class="font-semibold">{serviceNumber}</span>.
+                    <span class="font-semibold">{serviceNumber}</span>
                 </p>
             </div>
         {:else}
             <div class="text-center mb-8">
-                <h1 class="text-xl font-semibold small-caps">ENSKEDEDALEN SANITARIUM</h1>
-                <h2 class="text-lg">PATIENTINSKICKNINGSFORMULÄR</h2>
+                <h1 class="text-xl font-semibold small-caps">ENSKEDEDALEN MENTALINSTITUTION</h1>
+                <h2 class="text-lg">PATIENTINSKRIVNINGSFORMULÄR</h2>
             </div>
 
             <form class="space-y-6" on:submit|preventDefault={validateForm}>
@@ -79,7 +77,7 @@
                         <input type="text" value="Ingenjör" class="border border-gray-400 w-full p-2" readonly />
                     </label>
                     <label>
-                        Födelsetal
+                        Födelseort
                         <input type="text" value="Skövde" class="border border-gray-400 w-full p-2" readonly />
                     </label>
                     <label class="col-span-2">
@@ -96,7 +94,7 @@
                     </label>
                     <label>
                         Tel.
-                        <input type="tel" bind:value={telGuardianInput} required class="border border-red-400 w-full p-2" />
+                        <input type="tel" readonly value="+4676 259 18 55" class="border border-gray-400 w-full p-2" />
                     </label>
                     <label>
                         Personlig Läkare
@@ -104,7 +102,7 @@
                     </label>
                     <label>
                         Tel.
-                        <input type="tel" bind:value={telDoctorInput} required class="border border-red-400 w-full p-2" />
+                        <input type="tel" value="+4672 322 32 89" required class="border border-gray-400 w-full p-2" />
                     </label>
                     <label>
                         Ombud (Om något)
@@ -112,11 +110,11 @@
                     </label>
                     <label>
                         Tel.
-                        <input type="tel" value="-" class="border border-gray-400 w-full p-2" readonly />
+                        <input type="tel" class="border border-gray-400 w-full p-2" readonly />
                     </label>
                     <label>
-                        Registreringsnummer
-                        <input type="text" value="123456-7890" class="border border-gray-400 w-full p-2" readonly />
+                        Personnummer
+                        <input type="text" bind:value={personalNumberInput} class="border border-red-400 w-full p-2" />
                     </label>
                     <label>
                         Avdelning
