@@ -114,7 +114,7 @@
                     </label>
                     <label>
                         Personnummer
-                        <input type="text" bind:value={personalNumberInput} class="border border-red-400 w-full p-2" />
+                        <input type="text" bind:value={personalNumberInput} class="border border-gray-400 w-full p-2" />
                     </label>
                     <label>
                         Avdelning
