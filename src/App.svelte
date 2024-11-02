@@ -24,6 +24,12 @@
     }
 </style>
 
+<div class="absolute bottom-0 font-semibold left-0 text-red-500">
+    UN
+    <br />
+        DER
+    SÄNG<br />
+    EN</div>
 <div class="p-10 [&_*]:font-frank-ruhl-libre small-caps">
     <div class:mt-32={isSubmitted} class="bg-white p-8 max-w-2xl mx-auto border border-gray-300 rounded-lg shadow-lg">
         {#if isSubmitted}
