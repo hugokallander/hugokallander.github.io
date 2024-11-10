@@ -1,4 +1,4 @@
-abstract class GameObj {
+export abstract class GameObj {
     id: string;
     name: string;
 
@@ -17,13 +17,13 @@ abstract class Physical extends GameObj {
     }
 }
 
-class Team extends GameObj {
+export class Team extends GameObj {
     constructor(id: string, name: string) {
         super(id, name);
     }
 }
 
-class Player extends Physical {
+export class Player extends Physical {
     email: string;
 
     constructor(id: string, name: string, lat: number, long: number, email: string) {
@@ -32,7 +32,7 @@ class Player extends Physical {
     }
 }
 
-class Station extends Physical {
+export class Station extends Physical {
     image: string;
     points: number;
     value: number;
@@ -44,5 +44,3 @@ class Station extends Physical {
         this.value = value;
     }
 }
-
-const game = Game.getInstance();

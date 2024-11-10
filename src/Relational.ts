@@ -1,10 +1,9 @@
-abstract class Relational<RelObj extends Object, RelEnum> {
+export abstract class Relational<RelObj extends Object, RelEnum> {
     relationLookup: { [key: string]: Set<[RelObj, RelObj]> } = {};
 
     constructor(...enumTypes: RelEnum[]) {
-        const types = enumTypes.filter(v => typeof v === 'string');
-        types.forEach((type1, index1) => {
-            types.forEach((type2, index2) => {
+        enumTypes.forEach((type1, index1) => {
+            enumTypes.forEach((type2, index2) => {
                 if (index1 !== index2) {
                     const key = `${type1},${type2}`;
                     this.relationLookup[key] = new Set<[RelObj, RelObj]>();
@@ -19,6 +18,7 @@ abstract class Relational<RelObj extends Object, RelEnum> {
         return this.relationLookup[key] || this.relationLookup[keyRev] || new Set();
     }
 
+    // TODO: return reference to the relation
     protected getObjRelations(obj1: RelObj, obj2: RelObj): Set<[RelObj, RelObj]> {
         return this.getTypeRelations(obj1.constructor.name, obj2.constructor.name);
     }
