@@ -100,7 +100,6 @@ export class Game extends Relational<GameObj, G> {
 
     giveMission(team: Team, station: Station) {
         this.addRelation(team, station);
-        console.log(this.getRelatedObj(team, G.Station));
     }
 
     addTeamPlayer(team: Team, player: Player) {

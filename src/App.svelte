@@ -28,7 +28,6 @@
 
     function giveTeamRandomMission(team: Team) {
         const station = game.getRandomStation();
-        console.log(`Giving ${team.name} the mission to find ${station.name}`);
         game.giveMission(team, station);
     };
 
