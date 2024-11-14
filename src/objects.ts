@@ -4,12 +4,14 @@ export enum G {
     Station
 }
 
-export abstract class GameObj {
+export abstract class RelObj<ObjType> { type: ObjType; };
+
+export abstract class GameObj extends RelObj<G> {
     id: string;
     name: string;
-    type: G;
 
     constructor(id: string, name: string) {
+        super();
         this.id = id;
         this.name = name;
     }
@@ -44,14 +46,12 @@ export class Player extends Physical {
 
 export class Station extends Physical {
     image: string;
-    points: number;
     value: number;
     type = G.Station;
 
-    constructor(id: string, name: string, lat: number, long: number, image: string, points: number, value: number) {
+    constructor(id: string, name: string, lat: number, long: number, image: string, value: number) {
         super(id, name, lat, long);
         this.image = image;
-        this.points = points;
         this.value = value;
     }
 }

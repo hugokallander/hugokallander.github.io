@@ -11,12 +11,13 @@
     let selectedTeamId = '';
     let screen = 'start';
     let currentStation: Station;
+    let currentScore = 0;
 
     const stations: Station[] = [
-        new Station(generateUUID(), 'Station 1', 59.3293, 18.0686, 'image1.png', 10, 100),
-        new Station(generateUUID(), 'Station 2', 59.3293, 18.0686, 'image2.png', 20, 200),
-        new Station(generateUUID(), 'Station 3', 59.3295, 18.0688, 'image3.png', 30, 300),
-        new Station(generateUUID(), 'Station 4', 59.3296, 18.0689, 'image4.png', 40, 400),
+        new Station(generateUUID(), 'Station 1', 59.3293, 18.0686, 'src/assets/station1.png', 10),
+        new Station(generateUUID(), 'Station 2', 59.3293, 18.0686, 'src/assets/station2.png', 20),
+        new Station(generateUUID(), 'Station 3', 59.3295, 18.0688, 'src/assets/station3.png', 30),
+        new Station(generateUUID(), 'Station 4', 59.3296, 18.0689, 'src/assets/station4.png', 40),
     ];
     const teams: Team[] = [
         new Team(generateUUID(), 'Cool dudes'),
@@ -51,6 +52,8 @@
             takeStation(player, currentStation);
             giveTeamRandomMission(team);
             currentStation = game.getMission(team);
+            currentScore = game.getTeamScore(team);
+            (`Gave mission to ${team.name}: ${currentStation.name}`);
         } else {
             alert('The station is not close enough. Better luck next time!');
         }
@@ -74,7 +77,7 @@
             <div class="flex justify-between p-4 bg-gray-800 text-white">
                 <div>{team.name}</div>
                 <div>{player.name}</div>
-                <div>Points: {game.getTeamPoints(team)}</div>
+                <div>Points: {currentScore}</div>
             </div>
             <div class="flex flex-col items-center justify-center flex-grow">
                 <h1 class="text-2xl mb-4">{currentStation.name}</h1>

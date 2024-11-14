@@ -1,89 +1,105 @@
-abstract class AbsRelObj extends Object { type: any; };
+import { RelObj } from './objects';
+import { Relation } from './relations';
 
-export abstract class Relational<RelObj extends AbsRelObj, RelType> {
-    relationLookup: { [key: string]: Set<[RelObj, RelObj]> } = {};
+export abstract class Relational<Obj extends RelObj<ObjType>, Rel extends Relation<Obj, Obj, RelType>, ObjType, RelType> {
+    relationLookup: { [key: string]: Set<Rel> } = {};
 
-    constructor(...enumTypes: RelType[]) {
-        enumTypes.forEach((type1, index1) => {
-            enumTypes.forEach((type2, index2) => {
-                if (index1 !== index2) {
+    constructor(...enumTypes: ObjType[]) {
+        const sortedEnumTypes = enumTypes.sort();
+        sortedEnumTypes.forEach((type1, index1) => {
+            sortedEnumTypes.forEach((type2, index2) => {
+                if (index2 > index1) {
                     const key = `${type1},${type2}`;
-                    this.relationLookup[key] = new Set<[RelObj, RelObj]>();
+                    this.relationLookup[key] = new Set<Rel>();
                 }
             });
         });
     }
 
-    protected getTypeRelations(type1: RelType, type2: RelType): Set<[RelObj, RelObj]> {
-        const key = `${type1},${type2}`;
-        const keyRev = `${type2},${type1}`;
-        return this.relationLookup[key] || this.relationLookup[keyRev] || new Set();
+    protected getTypeRelations(type1: ObjType, type2: ObjType): Set<Rel> {
+        const sortedTypes = [type1, type2].sort();
+        const key = `${sortedTypes[0]},${sortedTypes[1]}`;
+        return this.relationLookup[key];
     }
 
-    // TODO: return reference to the relation
-    protected getObjRelations(obj1: RelObj, obj2: RelObj): Set<[RelObj, RelObj]> {
+    protected getObjTypeRelations(obj1: Obj, obj2: Obj): Set<Rel> {
         return this.getTypeRelations(obj1.type, obj2.type);
     }
 
-    protected getRelatedObjs(obj: RelObj, relType: RelType): Set<RelObj> {
-        const relatedObjs = new Set<RelObj>();
+    protected getRelatedObjs(obj: Obj, relType: ObjType): Set<Obj> {
+        const relatedObjs = new Set<Obj>();
         const relations = this.getTypeRelations(obj.type, relType);
-        relations.forEach(([o1, o2]) => {
-            if (o1 === obj) relatedObjs.add(o2);
-            if (o2 === obj) relatedObjs.add(o1);
+        relations.forEach((rel) => {
+            if (rel.obj1 === obj) relatedObjs.add(rel.obj2);
+            if (rel.obj2 === obj) relatedObjs.add(rel.obj1);
         });
         return relatedObjs;
     }
 
-    protected getSetElement(set: Set<RelObj>): RelObj | null {
+    protected getSetElement(set: Set<Obj>): Obj | null {
         return set.values().next().value;
     }
 
-    protected getRelatedObj(obj: RelObj, relType: RelType): RelObj | null {
+    protected getRelatedObj(obj: Obj, relType: ObjType): Obj | null {
         const relatedObjs = this.getRelatedObjs(obj, relType);
         return this.getSetElement(relatedObjs);
     }
 
-    protected getRelation(obj1: RelObj, obj2: RelObj): Set<[RelObj, RelObj]> {
-        const relation = this.getObjRelations(obj1, obj2);
-        const filteredRelations = new Set<[RelObj, RelObj]>(
-            Array.from(relation).filter(([o1, o2]) => o1 === obj1 && o2 === obj2)
+    protected flippedEqual(rel: Rel, obj1: Obj, obj2: Obj, relType?: RelType): boolean {
+        return rel.obj1 === obj1 && rel.obj2 === obj2
+            || rel.obj1 === obj2 && rel.obj2 === obj1
+            && (!relType || rel.type === relType);
+    }
+
+    protected getRelations(obj1: Obj, obj2: Obj, relType?: RelType): Set<Rel> {
+        const relations = this.getObjTypeRelations(obj1, obj2);
+        const filteredRelations = new Set<Rel>(
+            Array.from(relations).filter((rel) => this.flippedEqual(rel, obj1, obj2, relType))
         );
         return filteredRelations;
     }
 
-    protected hasRelation(obj1: RelObj, obj2: RelObj): boolean {
-        return this.getRelation(obj1, obj2).size > 0;
+    protected hasRelation(obj1: Obj, obj2: Obj): boolean {
+        return this.getRelations(obj1, obj2).size > 0;
     }
     
-    protected getConnectors(obj1: RelObj, middle: Set<RelObj>, obj2: RelObj): Set<RelObj> {
-        const connectors = new Set<RelObj>();
+    protected getConnectors(obj1: Obj, middle: Set<Obj>, obj2: Obj): Set<Obj> {
+        const connectors = new Set<Obj>();
         middle.forEach(m => {
             if (this.hasRelation(obj1, m) && this.hasRelation(m, obj2)) connectors.add(m);
         });
         return connectors;
     }
 
-    protected getIndirectObjs(obj1: RelObj, relType1: RelType, relType2: RelType): Set<RelObj> {
-        const middleObjs = this.getRelatedObjs(obj1, relType1);
-        const indirectObjs = new Set<RelObj>();
+    protected getIndirectObjs(obj1: Obj, objType1: ObjType, objType2: ObjType): Set<Obj> {
+        const middleObjs = this.getRelatedObjs(obj1, objType1);
+        const indirectObjs = new Set<Obj>();
         middleObjs.forEach(m => {
-            const relatedObjs = this.getRelatedObjs(m, relType2);
+            const relatedObjs = this.getRelatedObjs(m, objType2);
             relatedObjs.forEach(o => indirectObjs.add(o));
         });
 
         return indirectObjs;
     }
 
-    protected hasConnection(obj1: RelObj, middle: Set<RelObj>, obj2: RelObj): boolean {
+    protected hasConnection(obj1: Obj, middle: Set<Obj>, obj2: Obj): boolean {
         return this.getConnectors(obj1, middle, obj2).size > 0;
     }
 
-    protected addRelation(obj1: RelObj, obj2: RelObj) {
-        this.getObjRelations(obj1, obj2).add([obj1, obj2]);
+    protected makeRel(obj1: Obj, obj2: Obj, relType: RelType): Rel {
+        return { obj1, obj2, relType } as unknown as Rel;
     }
 
-    protected removeRelation(obj1: RelObj, obj2: RelObj) {
-        this.getObjRelations(obj1, obj2).delete([obj1, obj2]);
+    protected addRelation(obj1: Obj, obj2: Obj, relType: RelType) {
+        this.getObjTypeRelations(obj1, obj2).add(this.makeRel(obj1, obj2, relType));
+    }
+
+    // TODO: fix removals
+    protected removeRelation(obj1: Obj, obj2: Obj, relType: RelType) {
+        const relations = this.getObjTypeRelations(obj1, obj2);
+        const relationToRemove = Array.from(relations).find(rel => this.flippedEqual(rel, obj1, obj2, relType));
+        if (relationToRemove) {
+            relations.delete(relationToRemove);
+        }
     }
 }

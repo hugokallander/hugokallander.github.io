@@ -1,7 +1,8 @@
-import { Player, Team, Station, GameObj, G } from './objects';
+import { GameObj, G, Station, Team, Player } from './objects';
+import { GameRelation, R, Member, Taken, Mission } from './relations';
 import { Relational } from './relational';
 
-export class Game extends Relational<GameObj, G> {
+export class Game extends Relational<GameObj, GameRelation<GameObj, GameObj>, G, R> {
     static instance: Game | null = null;
     gameObjects: Set<GameObj> = new Set();
 
@@ -84,19 +85,21 @@ export class Game extends Relational<GameObj, G> {
 
     getPlayerPoints(player: Player): number {
         return Array.from(this.getPlayerTakenStations(player))
-            .reduce((sum, station) => sum + station.points, 0);
+            .reduce((sum, station) => sum + station.value, 0);
     }
 
-    getTeamPoints(team: Team): number {
+    getTeamScore(team: Team): number {
         return Array.from(this.getTeamTakenStations(team))
-            .reduce((sum, station) => sum + station.points, 0);
+            .reduce((sum, station) => sum + station.value, 0);
     }
 
     takeStation(station: Station, player: Player) {
         const team = this.getPlayerTeam(player);
         if (!this.hasRelation(station, team)) { return; }
-        this.removeRelation(station, team);
-        this.addRelation(station, player);
+        console.log("Team missions", this.getRelatedObjs(team, G.Station));
+        this.removeRelation(station, team, R.Mission);
+        console.log("Team missions after remove", this.getRelatedObjs(team, G.Station));
+        this.addRelation(station, player, R.Taken);
     }
 
     getMission(team: Team): Station | null {
@@ -104,10 +107,10 @@ export class Game extends Relational<GameObj, G> {
     }
 
     giveMission(team: Team, station: Station) {
-        this.addRelation(team, station);
+        this.addRelation(team, station, R.Mission);
     }
 
     addTeamPlayer(team: Team, player: Player) {
-        this.addRelation(team, player);   
+        this.addRelation(team, player, R.Member);   
     }
 }
