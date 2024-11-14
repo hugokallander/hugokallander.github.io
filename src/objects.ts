@@ -1,6 +1,13 @@
+export enum G {
+    Team,
+    Player,
+    Station
+}
+
 export abstract class GameObj {
     id: string;
     name: string;
+    type: G;
 
     constructor(id: string, name: string) {
         this.id = id;
@@ -18,6 +25,8 @@ abstract class Physical extends GameObj {
 }
 
 export class Team extends GameObj {
+    type = G.Team;
+
     constructor(id: string, name: string) {
         super(id, name);
     }
@@ -25,6 +34,7 @@ export class Team extends GameObj {
 
 export class Player extends Physical {
     email: string;
+    type = G.Player;
 
     constructor(id: string, name: string, lat: number, long: number, email: string) {
         super(id, name, lat, long);
@@ -36,6 +46,7 @@ export class Station extends Physical {
     image: string;
     points: number;
     value: number;
+    type = G.Station;
 
     constructor(id: string, name: string, lat: number, long: number, image: string, points: number, value: number) {
         super(id, name, lat, long);

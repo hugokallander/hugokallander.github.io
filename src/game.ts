@@ -1,11 +1,5 @@
-import { Player, Team, Station, GameObj } from './objects';
+import { Player, Team, Station, GameObj, G } from './objects';
 import { Relational } from './relational';
-
-enum G {
-    Team,
-    Player,
-    Station
-}
 
 export class Game extends Relational<GameObj, G> {
     static instance: Game | null = null;
@@ -27,6 +21,18 @@ export class Game extends Relational<GameObj, G> {
         return Game.instance;
     }
 
+    isStationTaken(station: Station): boolean {
+        return this.getRelatedObjs(station, G.Player).size > 0;
+    }
+
+    isStationAssigned(station: Station): boolean {
+        return this.getRelatedObjs(station, G.Team).size > 0;
+    }
+
+    isAvailableStation(obj: GameObj): obj is Station {
+        return obj instanceof Station && !this.isStationTaken(obj) && !this.isStationAssigned(obj);
+    }
+
     isNearStation(player: Player, station: Station): boolean {
         const distance = Math.sqrt(
             Math.pow(player.location.lat - station.location.lat, 2) +
@@ -44,8 +50,7 @@ export class Game extends Relational<GameObj, G> {
     }
 
     getRandomStation(): Station | null {
-        // TODO: check if station is taken or already assigned
-        const stations = Array.from(this.gameObjects).filter(obj => obj instanceof Station) as Station[];
+        const stations = Array.from(this.gameObjects).filter(this.isAvailableStation.bind(this)) as Station[];
         return stations[Math.floor(Math.random() * stations.length)] || null;
     }
 

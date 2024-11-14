@@ -1,7 +1,9 @@
-export abstract class Relational<RelObj extends Object, RelEnum> {
+abstract class AbsRelObj extends Object { type: any; };
+
+export abstract class Relational<RelObj extends AbsRelObj, RelType> {
     relationLookup: { [key: string]: Set<[RelObj, RelObj]> } = {};
 
-    constructor(...enumTypes: RelEnum[]) {
+    constructor(...enumTypes: RelType[]) {
         enumTypes.forEach((type1, index1) => {
             enumTypes.forEach((type2, index2) => {
                 if (index1 !== index2) {
@@ -12,7 +14,7 @@ export abstract class Relational<RelObj extends Object, RelEnum> {
         });
     }
 
-    protected getTypeRelations(type1: String, type2: String): Set<[RelObj, RelObj]> {
+    protected getTypeRelations(type1: RelType, type2: RelType): Set<[RelObj, RelObj]> {
         const key = `${type1},${type2}`;
         const keyRev = `${type2},${type1}`;
         return this.relationLookup[key] || this.relationLookup[keyRev] || new Set();
@@ -20,12 +22,12 @@ export abstract class Relational<RelObj extends Object, RelEnum> {
 
     // TODO: return reference to the relation
     protected getObjRelations(obj1: RelObj, obj2: RelObj): Set<[RelObj, RelObj]> {
-        return this.getTypeRelations(obj1.constructor.name, obj2.constructor.name);
+        return this.getTypeRelations(obj1.type, obj2.type);
     }
 
-    protected getRelatedObjs(obj: RelObj, relEnum: RelEnum): Set<RelObj> {
+    protected getRelatedObjs(obj: RelObj, relType: RelType): Set<RelObj> {
         const relatedObjs = new Set<RelObj>();
-        const relations = this.getTypeRelations(obj.constructor.name, String(relEnum));
+        const relations = this.getTypeRelations(obj.type, relType);
         relations.forEach(([o1, o2]) => {
             if (o1 === obj) relatedObjs.add(o2);
             if (o2 === obj) relatedObjs.add(o1);
@@ -37,8 +39,8 @@ export abstract class Relational<RelObj extends Object, RelEnum> {
         return set.values().next().value;
     }
 
-    protected getRelatedObj(obj: RelObj, relEnum: RelEnum): RelObj | null {
-        const relatedObjs = this.getRelatedObjs(obj, relEnum);
+    protected getRelatedObj(obj: RelObj, relType: RelType): RelObj | null {
+        const relatedObjs = this.getRelatedObjs(obj, relType);
         return this.getSetElement(relatedObjs);
     }
 
@@ -62,11 +64,11 @@ export abstract class Relational<RelObj extends Object, RelEnum> {
         return connectors;
     }
 
-    protected getIndirectObjs(obj1: RelObj, relEnum1: RelEnum, relEnum2: RelEnum): Set<RelObj> {
-        const middleObjs = this.getRelatedObjs(obj1, relEnum1);
+    protected getIndirectObjs(obj1: RelObj, relType1: RelType, relType2: RelType): Set<RelObj> {
+        const middleObjs = this.getRelatedObjs(obj1, relType1);
         const indirectObjs = new Set<RelObj>();
         middleObjs.forEach(m => {
-            const relatedObjs = this.getRelatedObjs(m, relEnum2);
+            const relatedObjs = this.getRelatedObjs(m, relType2);
             relatedObjs.forEach(o => indirectObjs.add(o));
         });
 

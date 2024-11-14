@@ -14,7 +14,7 @@
 
     const stations: Station[] = [
         new Station(generateUUID(), 'Station 1', 59.3293, 18.0686, 'image1.png', 10, 100),
-        new Station(generateUUID(), 'Station 2', 59.3294, 18.0687, 'image2.png', 20, 200),
+        new Station(generateUUID(), 'Station 2', 59.3293, 18.0686, 'image2.png', 20, 200),
         new Station(generateUUID(), 'Station 3', 59.3295, 18.0688, 'image3.png', 30, 300),
         new Station(generateUUID(), 'Station 4', 59.3296, 18.0689, 'image4.png', 40, 400),
     ];
@@ -37,7 +37,9 @@
 
     function handleSubmit() {
         player = new Player(generateUUID(), playerName, 59.3293, 18.0686, 'player1@example.com');
+        game.addGameObject(player);
         team = game.getTeam(selectedTeamId);
+        game.addTeamPlayer(team, player);
         currentStation = game.getMission(team);
         screen = 'game';
     }
