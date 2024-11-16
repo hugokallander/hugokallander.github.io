@@ -51,6 +51,14 @@ export class Game {
         return this.objects.ofType(G.Team).withProperty("id", id).one as Team;
     }
 
+    getPlayer(id: string): Player | null {
+        return this.objects.ofType(G.Player).withProperty("id", id).one as Player;
+    }
+
+    getStation(id: string): Station | null {
+        return this.objects.ofType(G.Station).withProperty("id", id).one as Station;
+    }
+
     getRandomStation(): Station | null {
         return this.objects.filter(this.isAvailableStation.bind(this)).random as Station;
     }
@@ -81,7 +89,7 @@ export class Game {
         return teamMembersTaken as Station[];
     }
 
-    getPlayerPoints(player: Player): number {
+    getPlayerScore(player: Player): number {
         return this.getPlayerTakenStations(player)
             .reduce((sum, station) => sum + station.value, 0);
     }
