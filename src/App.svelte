@@ -38,7 +38,7 @@
 
     function handleSubmit() {
         player = new Player(generateUUID(), playerName, 59.3293, 18.0686, 'player1@example.com');
-        game.addGameObject(player);
+        game.addGameObjects(player);
         team = game.getTeam(selectedTeamId);
         game.addTeamPlayer(team, player);
         currentStation = game.getMission(team);
@@ -72,23 +72,23 @@
         <button on:click={handleSubmit} class="p-2 bg-blue-500 text-white rounded" disabled={!playerName || !selectedTeamId}>Submit</button>
     </div>
 {:else if screen === 'game'}
-    {#if currentStation}
-        <div class="flex flex-col h-screen">
-            <div class="flex justify-between p-4 bg-gray-800 text-white">
-                <div>{team.name}</div>
-                <div>{player.name}</div>
-                <div>Points: {currentScore}</div>
-            </div>
+    <div class="flex flex-col h-screen">
+        <div class="flex justify-between p-4 bg-gray-800 text-white">
+            <div>{team.name}</div>
+            <div>{player.name}</div>
+            <div>Points: {currentScore}</div>
+        </div>
+        {#if currentStation}
             <div class="flex flex-col items-center justify-center flex-grow">
                 <h1 class="text-2xl mb-4">{currentStation.name}</h1>
                 <img src={currentStation.image} alt={currentStation.name} class="w-full h-64 object-cover mb-4" />
                 <button on:click={checkProximity} class="p-2 bg-green-500 text-white rounded">Search nearby</button>
             </div>
-        </div>
-    {:else}
-        <div class="flex flex-col items-center justify-center h-screen">
-            <h1 class="text-2xl mb-4">No missions available</h1>
-            <button on:click={() => screen = 'start'} class="p-2 bg-blue-500 text-white rounded">Go back</button>
-        </div>
-    {/if}
+        {:else}
+            <div class="flex flex-col items-center justify-center h-screen">
+                <h1 class="text-2xl mb-4">No missions available</h1>
+                <button on:click={() => screen = 'start'} class="p-2 bg-blue-500 text-white rounded">Go back</button>
+            </div>
+        {/if}
+    </div>
 {/if}

@@ -11,10 +11,9 @@ export abstract class Relation<Obj1Type extends Object, Obj2Type extends Object,
     obj2: Obj2Type;
     type: RelType;
 
-    constructor(obj1: Obj1Type, obj2: Obj2Type, type: RelType) {
+    constructor(obj1: Obj1Type, obj2: Obj2Type) {
         this.obj1 = obj1;
         this.obj2 = obj2;
-        this.type = type;
     }
 }
 
