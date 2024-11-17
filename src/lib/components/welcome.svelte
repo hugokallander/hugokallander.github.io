@@ -27,6 +27,7 @@
             body: JSON.stringify({
                 name: playerName,
                 email: email,
+                team_id: selectedTeamId
             })
         });
         playerId.set((await response.json()).id);

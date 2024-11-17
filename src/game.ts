@@ -112,7 +112,9 @@ export class Game {
     }
 
     giveMission(team: Team, station: Station) {
-        this.relations.add(new Mission(team, station));
+        if (this.isAvailableStation(station)) {
+            this.relations.add(new Mission(team, station));
+        }
     }
 
     addTeamPlayer(team: Team, player: Player) {

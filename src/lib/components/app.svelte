@@ -5,7 +5,7 @@
 
 </script>
 
-<div class="bg-gray-400">
+<div class="topography">
     {#if $currentView === 'start'}
         <Login />
     {:else if $currentView === 'game'}

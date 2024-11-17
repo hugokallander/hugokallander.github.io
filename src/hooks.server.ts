@@ -3,6 +3,7 @@ import { generateUUID } from './utils';
 import { Game } from './game';
 
 let game: Game = Game.getInstance();
+let initialized = false;
 
 const stations: Station[] = [
     new Station(generateUUID(), 'Station 1', 59.3293, 18.0686, 'src/assets/station1.png', 10),
@@ -12,9 +13,10 @@ const stations: Station[] = [
 ];
 
 const teams: Team[] = [
-    new Team(generateUUID(), 'Cool dudes'),
-    new Team(generateUUID(), 'Awesome possums'),
-    new Team(generateUUID(), 'Fantastic foxes'),
+    // Add colors to all teams
+    new Team(generateUUID(), 'Cool dudes', 'blue'),
+    new Team(generateUUID(), 'Awesome possums', 'green'),
+    new Team(generateUUID(), 'Fantastic foxes', 'red'),
 ];
 
 function giveTeamRandomMission(team: Team) {
@@ -23,10 +25,13 @@ function giveTeamRandomMission(team: Team) {
 };
 
 export async function handle({ event, resolve }) {
-    console.log('Server started, initializing game state...');
-    game = Game.getInstance();
-    game.addGameObjects(...teams, ...stations);
-    teams.forEach(team => giveTeamRandomMission(team));
+    if (!initialized) {
+        console.log('Server started, initializing game state...');
+        game = Game.getInstance();
+        game.addGameObjects(...teams, ...stations);
+        teams.forEach(team => giveTeamRandomMission(team));
+        initialized = true;
+    }
 
     return resolve(event);
 }

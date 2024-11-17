@@ -28,9 +28,11 @@ abstract class Physical extends GameObj {
 
 export class Team extends GameObj {
     type = G.Team;
+    color: string;
 
-    constructor(id: string, name: string) {
+    constructor(id: string, name: string, color: string) {
         super(id, name);
+        this.color = color;
     }
 }
 
