@@ -1,6 +1,6 @@
 <script>
     import { onMount } from 'svelte';
-    import { screen } from '../stores/store';
+    import { currentView, playerId } from '../stores/store';
 
     let playerName = '';
     let selectedTeamId = '';
@@ -19,7 +19,7 @@
     }
 
     async function handleSubmit() {
-        await fetch('/api/player', {
+        const response = await fetch('/api/player', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -29,11 +29,12 @@
                 email: email,
             })
         });
-        screen.set('game');
+        playerId.set((await response.json()).id);
+        currentView.set('game');
     }
 
     onMount(async () => {
-        screen.set('start');
+        currentView.set('start');
         teams = await getTeams();
     });
 </script>

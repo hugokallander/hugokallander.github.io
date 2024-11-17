@@ -55,3 +55,4 @@ tailwind.config.ts
 *.swp
 *.swo
 *.DS_Store
+station*.png

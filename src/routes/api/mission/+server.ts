@@ -1,10 +1,10 @@
 import { Game } from '../../../game';
 import { Player, Station } from '../../../objects';
-import { json, error } from '@sveltejs/kit';
+import { json, error, RequestEvent } from '@sveltejs/kit';
 
 const game = Game.getInstance();
 
-export async function POST(event) {
+export async function POST(event: RequestEvent) {
     const body = await event.request.json();
     const { player_id, lat, long } = body;
 

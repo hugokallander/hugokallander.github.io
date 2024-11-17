@@ -8,17 +8,17 @@ const game = Game.getInstance();
 
 export async function POST(event: RequestEvent) {
     const body = await event.request.json();
-    const { playerName, email } = body;
+    const { name, email } = body;
 
-    const player = new Player(generateUUID(), playerName, 0, 0, email);
+    const player = new Player(generateUUID(), name, 0, 0, email);
     game.addGameObjects(player);
 
-    return json(player);
+    return json(player.id);
 }
 
 export async function GET(event: RequestEvent) {
-    const body = await event.request.json();
-    const { player_id } = body;
+    const url = new URL(event.request.url);
+    const player_id = url.searchParams.get('player_id') as string;
 
     const player = game.getPlayer(player_id) as Player;
     const team = game.getPlayerTeam(player);

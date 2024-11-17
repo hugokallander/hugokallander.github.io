@@ -1,6 +1,7 @@
 <script lang="ts">
     import { onMount } from "svelte";
     import { Team, Player, Station } from "../../objects";
+    import { playerId } from "../stores/store";
 
     let team: Team;
     let player: Player;
@@ -8,13 +9,15 @@
     let currentScore = 0;
 
     onMount(async () => {
-        const playerResponse = await fetch("/api/player", {
+        const player_id = $playerId;
+        const playerResponse = await fetch(`/api/player?player_id=${player_id}`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
             },
         });
         const playerStats = await playerResponse.json();
+        console.log(playerStats);
         player = playerStats.player;
         currentStation = playerStats.station;
         team = playerStats.team;
@@ -24,26 +27,38 @@
     function checkProximity() {
         navigator.geolocation.getCurrentPosition(async (position) => {
             const { latitude, longitude } = position.coords;
-            const response = await fetch(`/api/station?lat=${latitude}&long=${longitude}`, {
-                method: "GET",
+            const response = await fetch(`/api/mission`, {
+                method: "Post",
                 headers: {
                     "Content-Type": "application/json",
                 },
+                body: JSON.stringify({
+                    player_id: player.id,
+                    lat: latitude,
+                    long: longitude,
+                }),
             });
             
             if (response.ok) {
                 alert('Congratulations! You found the station!');
+                currentStation = await response.json();
             }
         });
     }
 </script>
 
 <div class="flex flex-col h-screen">
-    <div class="flex justify-between p-4 bg-gray-800 text-white">
-        <div>{team.name}</div>
-        <div>{player.name}</div>
-        <div>Points: {currentScore}</div>
-    </div>
+    {#if player && team}
+        <div class="flex justify-between p-4 bg-gray-800 text-white">
+            <div>{team.name}</div>
+            <div>{player.name}</div>
+            <div>Points: {currentScore}</div>
+        </div>
+    {:else}
+        <div class="flex flex-col items-center justify-center h-screen">
+            <h1 class="text-2xl mb-4">Loading...</h1>
+        </div>
+    {/if}
     {#if currentStation}
         <div class="flex flex-col items-center justify-center flex-grow">
             <h1 class="text-2xl mb-4">{currentStation.name}</h1>
@@ -52,7 +67,7 @@
         </div>
     {:else}
         <div class="flex flex-col items-center justify-center h-screen">
-            <h1 class="text-2xl mb-4">No missions available at the moment. Sit tight for more!</h1>
+            <h1 class="text-2xl mb-4">You don't have any missions at the moment. Contact admin!</h1>
         </div>
     {/if}
 </div>
