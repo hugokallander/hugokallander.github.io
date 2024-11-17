@@ -1,6 +1,6 @@
 <script lang="ts">
     import { onMount } from "svelte";
-    import { Team, Player, Station } from "../../routes/objects";
+    import { Team, Player, Station } from "../../objects";
 
     let team: Team;
     let player: Player;
@@ -8,7 +8,12 @@
     let currentScore = 0;
 
     onMount(async () => {
-        const playerResponse = await fetch("/api/player");
+        const playerResponse = await fetch("/api/player", {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+            },
+        });
         const playerStats = await playerResponse.json();
         player = playerStats.player;
         currentStation = playerStats.station;
@@ -19,7 +24,12 @@
     function checkProximity() {
         navigator.geolocation.getCurrentPosition(async (position) => {
             const { latitude, longitude } = position.coords;
-            const response = await fetch(`/api/station?lat=${latitude}&long=${longitude}`);
+            const response = await fetch(`/api/station?lat=${latitude}&long=${longitude}`, {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            });
             
             if (response.ok) {
                 alert('Congratulations! You found the station!');

@@ -1,5 +1,6 @@
-import { Game } from '../game';
-import { Player, Station } from '../objects';
+import { Game } from '../../../game';
+import { Player, Station } from '../../../objects';
+import { json, error } from '@sveltejs/kit';
 
 const game = Game.getInstance();
 
@@ -11,16 +12,16 @@ export async function POST(event) {
     player.location = { lat, long };
     const team = game.getPlayerTeam(player);
     const station = game.getMission(team) as Station;
+    let randomStation: Station;
 
     if (game.isNearStation(player, station)) {
         game.takeStation(station, player);
-        game.giveMission(team, game.getRandomStation() as Station);
-    };
+        randomStation = game.getRandomStation() as Station;
+        game.giveMission(team, randomStation);
+    }
+    else {
+        error(400, "You are not near the station");
+    }
 
-    return {
-        status: 200,
-        body: {
-            message: 'Player location updated',
-        }
-    };
+    return json(randomStation);
 }

@@ -1,7 +1,8 @@
-import { generateUUID } from '../utils';
-import { Player, Station } from '../objects';
-import { Game } from '../game';
+import { generateUUID } from '../../../utils';
+import { Player, Station } from '../../../objects';
+import { Game } from '../../../game';
 import type { RequestEvent } from '@sveltejs/kit';
+import { json } from '@sveltejs/kit';
 
 const game = Game.getInstance();
 
@@ -11,6 +12,8 @@ export async function POST(event: RequestEvent) {
 
     const player = new Player(generateUUID(), playerName, 0, 0, email);
     game.addGameObjects(player);
+
+    return json(player);
 }
 
 export async function GET(event: RequestEvent) {
@@ -23,14 +26,11 @@ export async function GET(event: RequestEvent) {
     const score = game.getPlayerScore(player);
     const station = game.getMission(team) as Station;
 
-    return {
-        status: 200,
-        body: {
-            player,
-            team,
-            taken,
-            score,
-            station
-        }
-    };
+    return json({
+        player,
+        team,
+        taken,
+        score,
+        station,
+    });
 }

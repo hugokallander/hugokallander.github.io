@@ -8,13 +8,18 @@
     let teams = [];
 
     async function getTeams() {
-        return fetch('/api/teams')
-            .then(response => response.json())
-            .then(data => data.teams);
+        const response = await fetch('/api/teams', {
+            method: 'GET',
+            headers: {
+                'content-type': 'application/json'
+            }
+        });
+
+        return await response.json();
     }
 
     async function handleSubmit() {
-        fetch('/api/player', {
+        await fetch('/api/player', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -29,8 +34,7 @@
 
     onMount(async () => {
         screen.set('start');
-        const teamsPromise = await getTeams();
-        teams = teamsPromise.json();
+        teams = await getTeams();
     });
 </script>
 

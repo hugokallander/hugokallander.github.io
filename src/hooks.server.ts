@@ -1,4 +1,4 @@
-import { Player, Team, Station } from './objects';
+import { Team, Station } from './objects';
 import { generateUUID } from './utils';
 import { Game } from './game';
 
@@ -17,10 +17,16 @@ const teams: Team[] = [
     new Team(generateUUID(), 'Fantastic foxes'),
 ];
 
-game.addGameObjects(...teams, ...stations);
-teams.forEach(team => giveTeamRandomMission(team));
-
 function giveTeamRandomMission(team: Team) {
     const station = game.getRandomStation() as Station;
     game.giveMission(team, station);
 };
+
+export async function handle({ event, resolve }) {
+    console.log('Server started, initializing game state...');
+    game = Game.getInstance();
+    game.addGameObjects(...teams, ...stations);
+    teams.forEach(team => giveTeamRandomMission(team));
+
+    return resolve(event);
+}

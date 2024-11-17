@@ -5,8 +5,10 @@
 
 </script>
 
-{#if $screen === 'start'}
-    <Login />
-{:else if $screen === 'game'}
-    <Mission />
-{/if}
+<div class="bg-gray-400">
+    {#if $screen === 'start'}
+        <Login />
+    {:else if $screen === 'game'}
+        <Mission />
+    {/if}
+</div>
