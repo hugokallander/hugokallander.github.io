@@ -1,0 +1,513 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Varela+Round&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+@layer base {
+  :root {
+    --background: 220 20% 97%;
+    --foreground: 220 25% 10%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 220 25% 10%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 220 25% 10%;
+
+    --primary: 250 85% 65%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 220 15% 92%;
+    --secondary-foreground: 220 25% 10%;
+
+    --muted: 220 15% 92%;
+    --muted-foreground: 220 10% 45%;
+
+    --accent: 280 80% 60%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 220 15% 88%;
+    --input: 220 15% 88%;
+    --ring: 250 85% 65%;
+
+    --radius: 1rem;
+
+      /* Blob colors */
+    --blob-1: 200 85% 55%;
+    --blob-2: 280 70% 60%;
+    --blob-3: 160 65% 45%;
+    --blob-4: 320 75% 55%;
+
+    /* Liquid Glass Design Tokens */
+    --glow: 250 85% 65%;
+    --glow-primary: 200 90% 60%;
+    --glow-secondary: 280 75% 65%;
+    --glow-tertiary: 160 70% 50%;
+
+    --glass-border-light: hsl(var(--border) / 0.78);
+    --glass-border-dark: hsl(var(--foreground) / 0.18);
+  }
+
+  .dark {
+    --background: 225 25% 6%;
+    --foreground: 220 20% 85%;
+
+    --card: 225 25% 10%;
+    --card-foreground: 220 20% 95%;
+
+    --popover: 225 25% 10%;
+    --popover-foreground: 220 20% 95%;
+
+    --primary: 250 85% 65%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 225 20% 15%;
+    --secondary-foreground: 220 20% 95%;
+
+    --muted: 225 20% 15%;
+    --muted-foreground: 220 15% 55%;
+
+    --accent: 280 80% 60%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 225 20% 18%;
+    --input: 225 20% 18%;
+    --ring: 250 85% 65%;
+
+    /* Blob colors */
+    --blob-1: 200 85% 55%;
+    --blob-2: 280 70% 60%;
+    --blob-3: 160 65% 45%;
+    --blob-4: 320 75% 55%;
+
+    --glow: 250 85% 65%;
+    --glow-secondary: 280 80% 60%;
+
+    --glass-border-light: hsl(var(--foreground) / 0.25);
+    --glass-border-dark: hsl(var(--foreground) / 0.10);
+  }
+}
+
+@layer base {
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    font-family: 'Roboto', sans-serif;
+  }
+}
+
+@layer utilities {
+    .blob {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    opacity: 0.6;
+    will-change: transform;
+    pointer-events: none;
+  }
+
+  .blob-1 {
+    background: radial-gradient(circle, hsl(var(--blob-1) / 0.8) 0%, transparent 70%);
+    animation: blob-float-1 25s ease-in-out infinite;
+  }
+
+  .blob-2 {
+    background: radial-gradient(circle, hsl(var(--blob-2) / 0.7) 0%, transparent 70%);
+    animation: blob-float-2 30s ease-in-out infinite;
+  }
+
+  .blob-3 {
+    background: radial-gradient(circle, hsl(var(--blob-3) / 0.6) 0%, transparent 70%);
+    animation: blob-float-3 35s ease-in-out infinite;
+  }
+
+  .blob-4 {
+    background: radial-gradient(circle, hsl(var(--blob-4) / 0.5) 0%, transparent 70%);
+    animation: blob-float-4 28s ease-in-out infinite;
+  }
+
+  @keyframes blob-float-1 {
+    0%, 100% {
+      transform: translate(0%, 0%) scale(1);
+    }
+    25% {
+      transform: translate(30%, 20%) scale(1.1);
+    }
+    50% {
+      transform: translate(-10%, 40%) scale(0.9);
+    }
+    75% {
+      transform: translate(20%, -10%) scale(1.05);
+    }
+  }
+
+  @keyframes blob-float-2 {
+    0%, 100% {
+      transform: translate(0%, 0%) scale(1);
+    }
+    33% {
+      transform: translate(-40%, 30%) scale(1.15);
+    }
+    66% {
+      transform: translate(25%, -20%) scale(0.85);
+    }
+  }
+
+  @keyframes blob-float-3 {
+    0%, 100% {
+      transform: translate(0%, 0%) scale(1);
+    }
+    20% {
+      transform: translate(35%, -25%) scale(1.2);
+    }
+    40% {
+      transform: translate(-15%, 35%) scale(0.9);
+    }
+    60% {
+      transform: translate(-30%, -15%) scale(1.1);
+    }
+    80% {
+      transform: translate(20%, 25%) scale(0.95);
+    }
+  }
+
+  .gradient-text {
+    background: linear-gradient(
+      135deg,
+      hsl(var(--glow-primary)) 0%,
+      hsl(var(--glow-secondary)) 50%,
+      hsl(var(--glow-tertiary)) 100%
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    background-size: 200% 200%;
+    animation: gradient-shift 8s ease infinite;
+  }
+
+  .still-gradient-text {
+    background: linear-gradient(
+      135deg,
+      hsl(var(--glow-primary)) 0%,
+      hsl(var(--glow-secondary)) 50%,
+      hsl(var(--glow-tertiary)) 100%
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    background-size: 200% 200%;
+  }
+
+  @keyframes gradient-shift {
+    0%, 100% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+  }
+
+  @keyframes blob-float-4 {
+    0%, 100% {
+      transform: translate(0%, 0%) scale(1);
+    }
+    50% {
+      transform: translate(-25%, -30%) scale(1.1);
+    }
+  }
+
+  .glass {
+    @apply backdrop-blur-3xl;
+    position: relative;
+  }
+
+  .glass::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    pointer-events: none;
+    padding: 1px;
+    background: linear-gradient(to top right, transparent 0px, transparent 8px, var(--glass-border-dark) 25px, var(--glass-border-dark) calc(100% - 25px), transparent calc(100% - 8px), transparent 100%);
+    -webkit-mask:
+      linear-gradient(#000 0 0) content-box,
+      linear-gradient(#000 0 0);
+    mask:
+      linear-gradient(#000 0 0) content-box,
+      linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    opacity: var(--glass-border-shine, 0.9);
+  }
+
+  .glass-border-only {
+    --glass-bg-alpha: 0;
+    --glass-shadow-alpha: 0;
+    --glass-inset-alpha: 0;
+    --glass-sheen-alpha: 0;
+    --glass-hi-1: 0;
+    --glass-hi-2: 0;
+    --glass-hi-3: 0;
+    --glass-grain-alpha: 0;
+    background-color: transparent;
+    background-image: none;
+    box-shadow: none;
+  }
+
+  .glass-border-only::after {
+    opacity: 0;
+  }
+
+  .glass-border-only::before {
+    z-index: 30;
+    opacity: 1;
+  }
+
+  @keyframes glass-floatBG {
+    0%, 100% {
+      background-position: 0% 0%, 0% 0%, 0% 0%, 0% 0%;
+    }
+    25% {
+      background-position: 18% 72%, 12% 28%, 25% 0%, 0% 0%;
+    }
+    50% {
+      background-position: 72% 28%, 88% 66%, 60% 40%, 0% 0%;
+    }
+    75% {
+      background-position: 42% 58%, 28% 78%, 15% 55%, 0% 0%;
+    }
+  }
+
+  .glass-liquid::after {
+    background:
+      radial-gradient(120% 90% at 30% 10%, hsl(var(--glow) / var(--glass-liquid-glow-1, 0.14)) 0%, transparent 62%),
+      radial-gradient(120% 90% at 70% 90%, hsl(var(--glow-secondary) / var(--glass-liquid-glow-2, 0.12)) 0%, transparent 62%),
+      linear-gradient(135deg, hsl(0 0% 100% / 0.24) 0%, transparent 45%),
+      repeating-linear-gradient(
+        90deg,
+        hsl(0 0% 100% / 0.020) 0 1px,
+        transparent 1px 3px
+      );
+    background-size: 170% 170%, 170% 170%, 100% 100%, 100% 100%;
+    animation: glass-floatBG 18s ease-in-out infinite;
+    filter: url(#glass);
+    opacity: var(--glass-liquid-alpha, 0.6);
+  }
+
+  .dark .glass-muted {
+    --glass-bg-alpha: 0.34;
+    --glass-border-alpha-dark: 0.0;
+    --glass-shadow-alpha-dark: 0.48;
+    --glass-inset-alpha-dark: 0.0;
+    --glass-border-shine: 0.72;
+    --glass-sheen-alpha: 0.0;
+    --glass-liquid-alpha: 0.0;
+    --glass-hi-1-dark: 0.0;
+    --glass-hi-2-dark: 0.0;
+    --glass-hi-3-dark: 0.0;
+    --glass-sheen-1: 0.0;
+    --glass-sheen-2: 0.0;
+    --glass-sheen-3: 0.0;
+    --glass-grain-alpha: 0.0;
+    --glass-liquid-glow-1: 0.085;
+    --glass-liquid-glow-2: 0.072;
+  }
+
+  .glass-tint-primary {
+    --glass-tint-hsl: var(--primary);
+    --glass-tint-alpha: 0.16;
+    --glass-tint-alpha-2: 0.10;
+  }
+
+  .glass-tint-accent {
+    --glass-tint-hsl: var(--accent);
+    --glass-tint-alpha: 0.14;
+    --glass-tint-alpha-2: 0.09;
+  }
+
+  .glass-tint-secondary {
+    --glass-tint-hsl: var(--glow-secondary);
+    --glass-tint-alpha: 0.14;
+    --glass-tint-alpha-2: 0.09;
+  }
+
+  .glass-chip {
+    @apply backdrop-blur-sm;
+    --glass-bg-alpha: 0.16;
+    --glass-border-alpha: 0.28;
+    --glass-shadow-alpha: 0.16;
+    --glass-inset-alpha: 0.22;
+    --glass-border-shine: 0.62;
+    --glass-sheen-alpha: 0.30;
+    --glass-liquid-alpha: 0.32;
+  }
+
+  .card-title-shadow {
+    text-shadow:
+      0 0 1px hsl(var(--foreground) / 0.22),
+      0 0 2px hsl(var(--foreground) / 0.14);
+  }
+
+  .dark .card-title-shadow {
+    text-shadow:
+      0 1px 1px hsl(0 0% 0% / 0.42);
+  }
+
+  .timeline-rail {
+    position: relative;
+    border: 0;
+    box-shadow:
+      0 22px 48px -36px hsl(var(--foreground) / 0.40),
+      inset 0 1px 0 hsl(0 0% 100% / 0.26),
+      inset 0 -1px 0 hsl(var(--foreground) / 0.20);
+  }
+
+  .dark .timeline-rail {
+    border: 0;
+    box-shadow:
+      0 26px 60px -40px hsl(0 0% 0% / 0.75),
+      inset 0 1px 0 hsl(0 0% 100% / 0.12),
+      inset 0 -1px 0 hsl(0 0% 0% / 0.55);
+  }
+
+  .dark .glass-chip {
+    --glass-bg-alpha: 0.12;
+    --glass-border-alpha-dark: 0.10;
+    --glass-shadow-alpha-dark: 0.42;
+    --glass-inset-alpha-dark: 0.05;
+    --glass-border-shine: 0.58;
+    --glass-sheen-alpha: 0.26;
+    --glass-liquid-alpha: 0.28;
+  }
+
+  .glass-title {
+    position: relative;
+    display: inline-block;
+    letter-spacing: -0.01em;
+    color: transparent;
+    background-image:
+      linear-gradient(
+        180deg,
+        hsl(0 0% 100% / 0.72) 0%,
+        hsl(var(--foreground) / 1) 38%,
+        hsl(var(--foreground) / 0.94) 100%
+      );
+    -webkit-background-clip: text;
+    background-clip: text;
+    text-shadow:
+      0 12px 26px hsl(var(--foreground) / 0.18);
+  }
+
+  .glass-title::before {
+    content: attr(data-text);
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    transform: translate(0.9px, 1.25px);
+    color: hsl(var(--foreground) / 0.35);
+    filter: blur(0.15px);
+    opacity: 0.85;
+  }
+
+  .glass-title::after {
+    content: attr(data-text);
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    color: transparent;
+    -webkit-text-stroke: 1px hsl(0 0% 100% / 0.24);
+    filter: drop-shadow(0 10px 18px hsl(var(--foreground) / 0.10));
+    opacity: 0.75;
+  }
+
+  .dark .glass-title {
+    background-image:
+      linear-gradient(
+        180deg,
+        hsl(0 0% 100% / 0.72) 0%,
+        hsl(0 0% 100% / 0.92) 28%,
+        hsl(0 0% 100% / 0.74) 100%
+      );
+    text-shadow:
+      0 14px 30px hsl(0 0% 0% / 0.55);
+  }
+
+  .dark .glass-title::before {
+    color: hsl(0 0% 0% / 0.42);
+    opacity: 0.75;
+  }
+
+  .dark .glass-title::after {
+    -webkit-text-stroke: 1px hsl(0 0% 100% / 0.22);
+    filter: drop-shadow(0 14px 24px hsl(0 0% 0% / 0.52));
+  }
+
+  .glass-text-shadow {
+    text-shadow: 0 12px 26px hsl(var(--foreground) / 0.18);
+  }
+
+  .dark .glass-text-shadow {
+    text-shadow: 0 14px 30px hsl(0 0% 0% / 0.55);
+  }
+
+  .glass-strong {
+    @apply bg-card/80 backdrop-blur-sm border border-border/60;
+  }
+
+  .glow {
+    box-shadow: 0 0 40px -10px hsl(var(--glow) / 0.4);
+  }
+
+  .glow-sm {
+    box-shadow: 0 0 20px -5px hsl(var(--glow) / 0.3);
+  }
+
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary via-accent to-primary;
+    background-size: 200% auto;
+  }
+
+  .bg-gradient-radial {
+    background: radial-gradient(circle, var(--tw-gradient-from) 0%, var(--tw-gradient-to) 70%);
+  }
+
+  @keyframes shimmer-slide {
+    0% {
+      transform: translateX(-150%) skewX(20deg);
+    }
+    100% {
+      transform: translateX(150%) skewX(20deg);
+    }
+  }
+
+  .animate-shimmer-slide {
+    animation: shimmer-slide 5s ease-in-out infinite;
+  }
+  @keyframes draw-scroll-arrow {
+    0% {
+      stroke-dashoffset: 1000;
+    }
+    45% {
+      stroke-dashoffset: 0;
+    }
+    65% {
+      stroke-dashoffset: 0;
+    }
+    100% {
+      stroke-dashoffset: -1000;
+    }
+  }
+
+  .animate-scroll-arrow {
+    stroke-dasharray: 1000 1000;
+    stroke-dashoffset: 1000;
+    animation: draw-scroll-arrow 6s ease-in-out infinite;
+  }}

@@ -7,52 +7,18 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
-# Dependency directories
-node_modules/
-
-# Build output directories
-dist/
-dist-ssr/
-build/
-
-# Local environment files
+node_modules
+dist
+dist-ssr
 *.local
-.env
-.env.*.local
 
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
-.idea/
+.idea
 .DS_Store
 *.suo
 *.ntvs*
 *.njsproj
 *.sln
 *.sw?
-
-# SvelteKit specific files
-.svelte-kit/
-.svelte/
-__sapper__/
-
-# TypeScript build files
-*.tsbuildinfo
-
-# Tailwind CSS generated files
-tailwind.config.js
-tailwind.config.cjs
-tailwind.config.mjs
-tailwind.config.ts
-
-# Miscellaneous
-*.log
-*.lock
-*.cache
-*.tmp
-*.bak
-*.backup
-*.swp
-*.swo
-*.DS_Store
-station*.png
