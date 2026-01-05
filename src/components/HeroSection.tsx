@@ -16,7 +16,7 @@ const HeroSection = () => {
   useEffect(() => {
     const scrollCueTimer = setTimeout(() => {
       setShowScrollCue(true);
-    }, 4500); 
+    }, 3000); 
 
     const handleScroll = () => {
       if (window.scrollY > 50) {
@@ -123,10 +123,10 @@ const HeroSection = () => {
           >
             <defs>
               <linearGradient id="arrow-gradient" x1="0%" y1="0%" x2="0%" y2="100%">
-                <stop offset="0%" stopColor="hsl(var(--glow))" stopOpacity="0.4" />
+                <stop offset="0%" stopColor="hsl(var(--glow))" stopOpacity="0.8" />
                 <stop offset="25%" stopColor="hsl(var(--glow))" stopOpacity="0" />
                 <stop offset="50%" stopColor="var(--glass-border-light)" stopOpacity="0" />
-                <stop offset="100%" stopColor="hsl(var(--glow))" stopOpacity="0.3" />
+                <stop offset="100%" stopColor="hsl(var(--glow))" stopOpacity="0.6" />
               </linearGradient>
               <mask id="scroll-arrow-mask" maskUnits="userSpaceOnUse">
                 {/* Outer mask (white = visible) */}
@@ -156,7 +156,7 @@ const HeroSection = () => {
             <path
               d="m 24.956326,5 v 92.36391 l -19.9999997,-25 19.9999997,25 20,-25"
               fill="none"
-              stroke="hsl(var(--foreground) / 0.05)"
+              stroke="hsl(var(--foreground) / 0.25)"
               strokeWidth="14"
               strokeLinecap="round"
               strokeLinejoin="round"
