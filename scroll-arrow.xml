@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   viewBox="0 0 70 199.99969"
+   version="1.1"
+   id="svg1"
+   width="70"
+   height="199.99969"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs1" />
+  <style>
+    @keyframes draw-scroll-arrow {
+      0% { stroke-dashoffset: 1000; }
+      45% { stroke-dashoffset: 0; }
+      65% { stroke-dashoffset: 0; }
+      100% { stroke-dashoffset: -1000; }
+    }
+    .animate-scroll-arrow {
+      stroke-dasharray: 1000 1000;
+      stroke-dashoffset: 1000;
+      animation: draw-scroll-arrow 6s ease-in-out infinite;
+    }
+    @media (prefers-color-scheme: dark) {
+      path { stroke: #e2e8f0; }
+    }
+  </style>
+  <path
+     class="animate-scroll-arrow"
+     d="M 45,5 V 65 C 45,75.717685 39.599386,85.264433 33.036613,88.780173 26.215507,92.434304 17.918472,91.852906 12.127353,87.982254 7.8941909,85.152905 5,80.428497 5,75 5,66.477521 9.1279447,60.710601 14.77233,58.490572 19.129457,56.776843 26.520277,58.18203 29.612358,60.435749 31.451786,61.77645 33.466109,63.992901 35,66.375538 43.224748,79.151277 45,104.01497 45,125 v 70 l -20,-25 20,25 20,-25"
+     fill="none"
+     stroke="#FFF"
+     stroke-width="10"
+     stroke-linecap="round"
+     stroke-linejoin="round"
+     id="path1" />
+</svg>
