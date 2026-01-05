@@ -15,18 +15,28 @@ export default defineConfig(({ mode }) => ({
     imagetools(),
     ViteImageOptimizer({
       png: {
-        quality: 80,
+        quality: 75,
       },
       jpeg: {
-        quality: 80,
+        quality: 75,
       },
       jpg: {
-        quality: 80,
+        quality: 75,
       },
       webp: {
-        lossless: true,
+        lossless: false,
+        quality: 75,
       },
     }),
+    {
+      name: 'html-transform',
+      transformIndexHtml(html) {
+        return html.replace(
+          /<link rel="stylesheet" crossorigin href="(.*?)">/g,
+          '<link rel="preload" href="$1" as="style" onload="this.onload=null;this.rel=\'stylesheet\'"><noscript><link rel="stylesheet" href="$1"></noscript>'
+        );
+      },
+    },
   ].filter(Boolean),
   resolve: {
     alias: {
