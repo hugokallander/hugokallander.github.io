@@ -15,17 +15,17 @@ export default defineConfig(({ mode }) => ({
     imagetools(),
     ViteImageOptimizer({
       png: {
-        quality: 75,
+        quality: 80,
       },
       jpeg: {
-        quality: 75,
+        quality: 80,
       },
       jpg: {
-        quality: 75,
+        quality: 80,
       },
       webp: {
-        lossless: false,
-        quality: 75,
+        lossless: true,
+        quality: 80,
       },
     }),
     {
