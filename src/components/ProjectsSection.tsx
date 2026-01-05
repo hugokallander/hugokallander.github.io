@@ -135,6 +135,8 @@ const ProjectCard = ({ project }: ProjectCardProps) => {
               )}
               loading="lazy"
               decoding="async"
+              width="800"
+              height="600"
             />
             <div
               aria-hidden="true"

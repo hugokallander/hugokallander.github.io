@@ -189,6 +189,7 @@
     color: transparent;
     background-size: 200% 200%;
     animation: gradient-shift 8s ease infinite;
+    will-change: background-position;
   }
 
   .still-gradient-text {
