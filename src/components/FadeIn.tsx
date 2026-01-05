@@ -40,7 +40,7 @@ export const FadeIn = ({
     }
 
     return () => observer.disconnect();
-  }, [onVisible]);
+  }, [onVisible, threshold]);
 
   return (
     <div

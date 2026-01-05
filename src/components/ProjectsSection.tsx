@@ -5,17 +5,13 @@ import {
   Boxes,
   Newspaper,
   Monitor,
-  Star,
-  GitFork,
 } from "lucide-react";
 import secureDatasetSharingImg from "@/assets/Secure_dataset_sharing.png";
 import dpoImg from "@/assets/dpo.png";
 import ptexImg from "@/assets/ptex.png";
 import startupImg from "@/assets/startup.jpg";
 import artifactsImg from "@/assets/artifacts.jpg";
-import { useTilt } from "@/hooks/use-tilt";
 import { FadeIn } from "./FadeIn";
-import { useGithubRepoStats } from "@/hooks/use-github-repo-stats";
 import { cn } from "@/lib/utils";
 
 interface Project {
