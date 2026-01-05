@@ -92,17 +92,6 @@ interface ProjectCardProps {
 }
 
 const ProjectCard = ({ project }: ProjectCardProps) => {
-  const { data: repoStats } = useGithubRepoStats(project.githubRepo);
-
-  const formatCount = (value: number) =>
-    new Intl.NumberFormat(undefined, {
-      notation: "compact",
-      maximumFractionDigits: 1,
-    }).format(value);
-
-  const showStars = Boolean(repoStats && repoStats.stars > 4);
-  const showForks = Boolean(repoStats && repoStats.forks > 4);
-  const showRepoStats = showStars || showForks;
   
   return (
     <a
