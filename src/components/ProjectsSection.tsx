@@ -6,11 +6,11 @@ import {
   Newspaper,
   Monitor,
 } from "lucide-react";
-import secureDatasetSharingImg from "@/assets/Secure_dataset_sharing.png";
-import dpoImg from "@/assets/dpo.png";
-import ptexImg from "@/assets/ptex.png";
-import startupImg from "@/assets/startup.jpg";
-import artifactsImg from "@/assets/artifacts.jpg";
+import secureDatasetSharingImg from "@/assets/Secure_dataset_sharing.png?w=800&format=webp";
+import dpoImg from "@/assets/dpo.png?w=800&format=webp";
+import ptexImg from "@/assets/ptex.png?w=800&format=webp";
+import startupImg from "@/assets/startup.jpg?w=800&format=webp";
+import artifactsImg from "@/assets/artifacts.jpg?w=800&format=webp";
 import { FadeIn } from "./FadeIn";
 import { cn } from "@/lib/utils";
 
