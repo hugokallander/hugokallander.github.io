@@ -15,6 +15,7 @@ export default {
     },
     extend: {
       screens: {
+        'xs': '600px',
         'short': { 'raw': '(max-height: 600px)' },
       },
       fontFamily: {

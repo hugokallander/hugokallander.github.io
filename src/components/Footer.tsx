@@ -1,4 +1,3 @@
-import { FadeIn } from "./FadeIn";
 import { Github, Linkedin, Microscope } from "lucide-react";
 
 const Footer = () => {
