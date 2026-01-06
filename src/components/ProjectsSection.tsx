@@ -147,6 +147,7 @@ const ProjectCard = ({ project }: ProjectCardProps) => {
            href={project.url}
            target="_blank"
            rel="noopener noreferrer"
+           aria-label={`View project: ${project.title}`}
            className={cn("absolute bottom-6 right-6 z-30 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center transition-all duration-300 overflow-hidden",
             "w-14 h-14 xs:w-[2.7rem] xs:h-[2.7rem]"
            )}
