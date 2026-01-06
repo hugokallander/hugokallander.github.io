@@ -1,4 +1,9 @@
 import { motion } from "framer-motion";
+import type { ComponentType } from "react";
+
+// Workaround for framer-motion v12 type issues with React 18
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const MotionDiv = motion.div as ComponentType<any>;
 
 const AnimatedBackground = () => {
   return (
@@ -10,28 +15,28 @@ const AnimatedBackground = () => {
       <div className="absolute inset-0 grid-pattern opacity-50" />
       
       {/* Animated blobs */}
-      <motion.div
+      <MotionDiv
         className="blob blob-1 w-[600px] h-[600px] top-[-10%] left-[-5%]"
         initial={{ opacity: 0 }}
         animate={{ opacity: 0.6 }}
         transition={{ duration: 2 }}
       />
       
-      <motion.div
+      <MotionDiv
         className="blob blob-2 w-[700px] h-[700px] top-[20%] right-[-15%]"
         initial={{ opacity: 0 }}
         animate={{ opacity: 0.5 }}
         transition={{ duration: 2, delay: 0.3 }}
       />
       
-      <motion.div
+      <MotionDiv
         className="blob blob-3 w-[500px] h-[500px] bottom-[10%] left-[20%]"
         initial={{ opacity: 0 }}
         animate={{ opacity: 0.4 }}
         transition={{ duration: 2, delay: 0.6 }}
       />
       
-      <motion.div
+      <MotionDiv
         className="blob blob-4 w-[550px] h-[550px] bottom-[-5%] right-[10%]"
         initial={{ opacity: 0 }}
         animate={{ opacity: 0.35 }}
@@ -39,7 +44,7 @@ const AnimatedBackground = () => {
       />
 
       {/* Additional floating orbs for depth */}
-      <motion.div
+      <MotionDiv
         className="absolute w-[200px] h-[200px] rounded-full top-[40%] left-[50%]"
         style={{
           background: "radial-gradient(circle, hsl(200 90% 60% / 0.3) 0%, transparent 70%)",
@@ -57,7 +62,7 @@ const AnimatedBackground = () => {
         }}
       />
 
-      <motion.div
+      <MotionDiv
         className="absolute w-[150px] h-[150px] rounded-full top-[60%] right-[30%]"
         style={{
           background: "radial-gradient(circle, hsl(280 75% 65% / 0.25) 0%, transparent 70%)",

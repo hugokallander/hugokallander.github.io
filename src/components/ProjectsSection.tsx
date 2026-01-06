@@ -179,7 +179,7 @@ const ProjectsSection = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {projects.map((project) => (
-              <ProjectCard project={project} />
+              <ProjectCard key={project.id} project={project} />
             ))}
           </div>
         </div>
