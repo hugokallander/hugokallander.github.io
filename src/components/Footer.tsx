@@ -29,7 +29,7 @@ const Footer = () => {
           rel="noopener noreferrer"
           className="text-muted-foreground hover:text-foreground transition-colors duration-300"
         >
-          <Microscope className="w-6 h-6 md:w-7 md:h-7" />
+          <Microscope className="w-8 h-8" />
           <span className="sr-only">AICell Lab Profile</span>
         </a>
       </div>

@@ -1,11 +1,30 @@
 import { motion } from "framer-motion";
-import type { ComponentType } from "react";
+import { ComponentType, useEffect, useState } from "react";
 
 // Workaround for framer-motion v12 type issues with React 18
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const MotionDiv = motion.div as ComponentType<any>;
 
 const AnimatedBackground = () => {
+  const [isScrolling, setIsScrolling] = useState(false);
+
+  useEffect(() => {
+    let timeoutId: ReturnType<typeof setTimeout>;
+    const handleScroll = () => {
+      setIsScrolling(true);
+      clearTimeout(timeoutId);
+      timeoutId = setTimeout(() => {
+        setIsScrolling(false);
+      }, 150);
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      clearTimeout(timeoutId);
+    };
+  }, []);
+
   return (
     <div className="fixed inset-0 -z-10 overflow-hidden">
       {/* Base gradient */}
@@ -45,41 +64,47 @@ const AnimatedBackground = () => {
 
       {/* Additional floating orbs for depth */}
       <MotionDiv
-        className="absolute w-[200px] h-[200px] rounded-full top-[40%] left-[50%]"
-        style={{
-          background: "radial-gradient(circle, hsl(200 90% 60% / 0.3) 0%, transparent 70%)",
-          filter: "blur(40px)",
-        }}
-        animate={{
-          x: [0, 50, -30, 0],
-          y: [0, -40, 20, 0],
-          scale: [1, 1.2, 0.9, 1],
-        }}
-        transition={{
-          duration: 20,
-          repeat: Infinity,
-          ease: "easeInOut",
-        }}
-      />
+        initial={{ opacity: 1 }}
+        animate={{ opacity: isScrolling ? 0 : 1 }}
+        transition={{ duration: 0.3 }}
+      >
+        <MotionDiv
+          className="absolute w-[200px] h-[200px] rounded-full top-[40%] left-[50%]"
+          style={{
+            background: "radial-gradient(circle, hsl(200 90% 60% / 0.3) 0%, transparent 70%)",
+            filter: "blur(40px)",
+          }}
+          animate={{
+            x: [0, 50, -30, 0],
+            y: [0, -40, 20, 0],
+            scale: [1, 1.2, 0.9, 1],
+          }}
+          transition={{
+            duration: 20,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+        />
 
-      <MotionDiv
-        className="absolute w-[150px] h-[150px] rounded-full top-[60%] right-[30%]"
-        style={{
-          background: "radial-gradient(circle, hsl(280 75% 65% / 0.25) 0%, transparent 70%)",
-          filter: "blur(30px)",
-        }}
-        animate={{
-          x: [0, -60, 40, 0],
-          y: [0, 30, -50, 0],
-          scale: [1, 0.8, 1.1, 1],
-        }}
-        transition={{
-          duration: 18,
-          repeat: Infinity,
-          ease: "easeInOut",
-          delay: 2,
-        }}
-      />
+        <MotionDiv
+          className="absolute w-[150px] h-[150px] rounded-full top-[60%] right-[30%]"
+          style={{
+            background: "radial-gradient(circle, hsl(280 75% 65% / 0.25) 0%, transparent 70%)",
+            filter: "blur(30px)",
+          }}
+          animate={{
+            x: [0, -60, 40, 0],
+            y: [0, 30, -50, 0],
+            scale: [1, 0.8, 1.1, 1],
+          }}
+          transition={{
+            duration: 18,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: 2,
+          }}
+        />
+      </MotionDiv>
       
       {/* Noise texture */}
       <div className="absolute inset-0 noise pointer-events-none" />

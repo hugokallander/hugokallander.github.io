@@ -117,6 +117,17 @@ const ProjectCard = ({ project }: ProjectCardProps) => {
         >
           <span className="sr-only">View Project</span>
         </a>
+
+        {/* Mobile link: visible only when focused (second tap) */}
+        <a
+          href={project.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="absolute inset-0 z-20 hidden group-focus-within:block [@media(hover:hover)]:hidden"
+          aria-label={`View project: ${project.title}`}
+        >
+          <span className="sr-only">View Project</span>
+        </a>
         
         {project.image && (
           <>
@@ -149,30 +160,30 @@ const ProjectCard = ({ project }: ProjectCardProps) => {
            rel="noopener noreferrer"
            aria-label={`View project: ${project.title}`}
            className={cn("absolute bottom-6 right-6 z-30 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center transition-all duration-300 overflow-hidden",
-            "w-14 h-14 xs:w-[2.7rem] xs:h-[2.7rem]"
+            "w-[2.7rem] h-[2.7rem]"
            )}
         >
           <div className={cn("absolute w-full h-full bg-[linear-gradient(to_right,transparent_30%,rgba(255,255,255,0.05)_45%,rgba(255,255,255,0.05)_55%,transparent_70%)] -translate-x-[150%] group-hover:animate-shimmer-slide group-focus-within:animate-shimmer-slide")} />
-          <ChevronRight className="pl-[0.2rem] w-10 h-10 text-foreground relative z-10" />
+          <ChevronRight className="pl-[0.2rem] w-8 h-8 text-foreground relative z-10" />
         </a>
 
         <div className={cn("relative z-10 h-full p-6 pr-16 flex flex-col justify-end")}>
           <div className={cn("flex flex-wrap items-start justify-between gap-3 mb-1")}>
             <h3
-              className={cn("text-xl lg:text-3xl font-semibold text-foreground font-heading flex-1 min-w-0")}
+              className={cn("text-lg sm:text-xl lg:text-3xl font-semibold text-foreground font-heading flex-1 min-w-0")}
               data-text={project.title}
             >
               {project.title}
             </h3>
           </div>
 
-          <p className={cn("text-md md:text-lg text-foreground/70 font-medium")}>
+          <p className={cn("text-sm sm:text-base md:text-lg text-foreground/70 font-medium")}>
             {project.date}
           </p>
 
           <div className={cn("grid grid-rows-[0fr] transition-[grid-template-rows] duration-500 delay-300 group-hover:grid-rows-[1fr] group-hover:delay-0 group-focus-within:grid-rows-[1fr] group-focus-within:delay-0")}>
             <div className="overflow-hidden flex flex-col justify-end">
-              <p className={cn("text-md md:text-lg lg:text-xl text-foreground/90 leading-relaxed mt-2 drop-shadow-md max-w-[90%] opacity-0 transition-opacity duration-300 delay-0 group-hover:opacity-100 group-hover:delay-500 group-focus-within:opacity-100 group-focus-within:delay-500")}>
+              <p className={cn("text-sm sm:text-base md:text-lg lg:text-xl text-foreground/90 leading-relaxed mt-2 drop-shadow-md max-w-[90%] opacity-0 transition-opacity duration-300 delay-0 group-hover:opacity-100 group-hover:delay-500 group-focus-within:opacity-100 group-focus-within:delay-500")}>
                 {project.description}
               </p>
             </div>
@@ -194,7 +205,7 @@ const ProjectsSection = () => {
             </h2>
             <div className="w-[calc(100%)] h-[2px]  bg-gradient-to-r from-transparent via-foreground/10 to-transparent mx-auto mb-12 rounded-full" />
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div className="grid grid-cols-1 xs:grid-cols-2 gap-3 xs:gap-8">
             {projects.map((project) => (
               <ProjectCard key={project.id} project={project} />
             ))}
