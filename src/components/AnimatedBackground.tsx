@@ -1,9 +1,10 @@
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import { ComponentType, useEffect, useState } from "react";
+import { cn } from "@/lib/utils";
 
 // Workaround for framer-motion v12 type issues with React 18
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-const MotionDiv = motion.div as ComponentType<any>;
+const MotionDiv = m.div as ComponentType<any>;
 
 const AnimatedBackground = () => {
   const [isScrolling, setIsScrolling] = useState(false);
@@ -26,7 +27,12 @@ const AnimatedBackground = () => {
   }, []);
 
   return (
-    <div className="fixed inset-0 -z-10 overflow-hidden">
+    <div className={cn("fixed inset-0 -z-10 overflow-hidden", isScrolling && "scrolling")}>
+      <style>{`
+        .scrolling .blob {
+          animation-play-state: paused !important;
+        }
+      `}</style>
       {/* Base gradient */}
       <div className="absolute inset-0 bg-background" />
       
