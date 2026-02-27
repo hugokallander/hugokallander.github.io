@@ -1,15 +1,15 @@
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import { useState, useEffect } from "react";
 import type { ComponentType } from "react";
 import { GithubIcon, LinkedinIcon, Microscope } from "lucide-react";
 
 // Workaround for framer-motion v12 type issues with React 18
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-const MotionDiv = motion.div as ComponentType<any>;
+const MotionDiv = m.div as ComponentType<any>;
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-const MotionH1 = motion.h1 as ComponentType<any>;
+const MotionH1 = m.h1 as ComponentType<any>;
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-const MotionP = motion.p as ComponentType<any>;
+const MotionP = m.p as ComponentType<any>;
 
 const HeroSection = () => {
   const [showScrollCue, setShowScrollCue] = useState(false);
