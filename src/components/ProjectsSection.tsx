@@ -26,6 +26,8 @@ import hyphaImg from "@/assets/hypha-logo-black.svg";
 import Agents24SrcSet from "@/assets/24agents.png?w=600;800;1200;1600&format=webp&as=srcset&quality=100";
 import Agents24 from "@/assets/24agents.png?w=800&format=webp&quality=100"; // Fallback
 
+import pantheonImg from "@/assets/pantheon.png?w=800&format=webp";
+
 import { FadeIn } from "./FadeIn";
 import { cn } from "@/lib/utils";
 
@@ -89,7 +91,7 @@ const projects: Project[] = [
       tags: ["AI", "Ecosystem", "Open Source"],
       icon: Boxes,
       tone: "primary",
-      image: startupImg,
+      image: pantheonImg,
       url: "https://pantheonos.stanford.edu",
     },
     {
@@ -264,7 +266,7 @@ const ProjectCard = ({ project }: ProjectCardProps) => {
 const ProjectsSection = () => {
   return (
     
-    <section className="mb-8 pb-20 sm:px-6">
+    <section className="mb-8 pb-20 md:px-6">
       <FadeIn threshold={0}>
         <h2 className="text-3xl md:text-4xl text-center mb-8">
           <span className="text-foreground/80 font-heading font-bold">My projects</span>
