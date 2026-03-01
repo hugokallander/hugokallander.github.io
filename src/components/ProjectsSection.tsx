@@ -36,37 +36,30 @@ interface Project {
   title: string;
   date: string;
   description: string;
-  tags: string[];
-  icon: React.ElementType;
-  tone: "primary" | "accent" | "secondary";
   image?: string;
   srcSet?: string;
   url?: string;
-  githubRepo?: string;
   background?: string;
+  role?: string;
 }
 
 const projects: Project[] = [
     {
       id: 0,
       title: "RI-SCALE Model Hub: AI Agent & Model Sharing Platform",
+      role: "Creator",
       date: "Since February 2026",
       description: "The Model Hub is a platform for sharing scientific AI agents and models. I built it for use by the RI-SCALE European international research project.",
-      tags: ["AI", "Cell Biology", "Hypha", "Image Analysis"],
       image: modelhubImg,
       srcSet: modelhubSrcSet,
-      icon: Boxes,
-      tone: "secondary",
       url: "https://modelhub.riscale.eu",
     },
     {
       id: 1,
       title: "Safe Colab: AI-Protected Dataset Collaboration Platform",
+      role: "Creator",
       date: "Since November 2025",
       description: "I built an innovative platform for securely inviting collaborators to work on sensitive datasets, with privacy guaranteed by AI.",
-      tags: ["AI", "Security", "Privacy", "Data Sharing"],
-      icon: Shield,
-      tone: "primary",
       image: secureDatasetSharingImg,
       srcSet: secureDatasetSharingSrcSet,
       url: "https://safe-colab.aicell.io",
@@ -74,82 +67,66 @@ const projects: Project[] = [
     {
       id: 2,
       title: "24Agents: AI Agent & Tool Research Repository",
+      role: "Creator",
       date: "Since September 2025",
       description: "A platform for zero-install 24/7 agents and hundreds of scientific tools, contributed by me.",
-      tags: ["AI", "Tools", "Research"],
-      icon: Boxes,
-      tone: "secondary",
       image: Agents24,
       srcSet: Agents24SrcSet,
       url: "https://24agents.aicell.io",
     },
     {
       id: 3,
-      title: "PantheonOS: AI Data Scientist (Contributor)",
+      title: "PantheonOS: AI Data Scientist",
+      role: "Key Contributor",
       date: "August 2025",
       description: "Collaboration with Stanford. An open source AI-powered ecosystem of scientific agents. I enabled the crucial integration of Hypha.",
-      tags: ["AI", "Ecosystem", "Open Source"],
-      icon: Boxes,
-      tone: "primary",
       image: pantheonImg,
       url: "https://pantheonos.stanford.edu",
     },
     {
       id: 4,
       title: "File System-like Interface For Hypha Artifacts",
+      role: "Creator",
       date: "Since May 2025",
       description: "A filesystem-like Python library for interacting with Hypha artifacts. I built it for Pyodide installation and as an intuitive API for AI agents. 17,000 downloads on PyPi.",
-      tags: ["Python", "Hypha", "Cloud Storage", "AsyncIO"],
-      icon: Package,
-      tone: "accent",
       image: artifactsImg,
       url: "https://clickpy.clickhouse.com/dashboard/hypha-artifact",
-      githubRepo: "aicell-lab/hypha-artifact",
     },
     {
       id: 5,
-      title: "Hypha: AI-First Data Management System (Contributor)",
+      title: "Vector Database Services for Hypha Ecosystem",
+      role: "Creator",
+      date: "Since March 2025",
+      description: "AI-first integration of Weaviate into Hypha. I added fine-grained access control, virtual collections and metadata management. Currently used for performant cell segmentation search.",
+      image: startupImg,
+      url: "https://github.com/aicell-lab/hypha-startup-services",
+    },
+    {
+      id: 6,
+      title: "Hypha: AI-First Data Management System",
+      role: "Key Contributor",
       date: "Since September 2024",
       description: "An AI-first swiss knife platform for serverless apps. I've contributed to various parts of the system, from core backend services to frontend applications.",
-      tags: ["AI", "Data Management", "Cell Biology", "Python"],
-      icon: Boxes,
-      tone: "primary",
       image: hyphaImg,
       background: "bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500",
       url: "https://hypha.aicell.io",
     },
     {
-      id: 6,
-      title: "Vector Database Services for Hypha Ecosystem",
-      date: "Since March 2025",
-      description: "AI-first integration of Weaviate into Hypha. I added fine-grained access control, virtual collections and metadata management. Currently used for performant cell segmentation search.",
-      tags: ["Hypha", "Services", "Infrastructure"],
-      icon: Boxes,
-      tone: "secondary",
-      image: startupImg,
-      url: "https://github.com/aicell-lab/hypha-startup-services",
-      githubRepo: "aicell-lab/hypha-startup-services",
-    },
-    {
     id: 7,
-    title: "Engaging News Article Title Generator (DPO)",
+    title: "Engaging News Article Title Generator using DPO",
+    role: "Author",
     date: "June 2024",
     description: "My master's thesis. In collaboration with the Norwegian newspaper Aftenposten, I fine-tuned a model to generate engaging article titles using Direct Preference Optimization (DPO).",
-    tags: ["Python", "Transformers", "NLP", "DPO"],
-    icon: Newspaper,
-    tone: "primary",
     image: dpoImg,
     srcSet: dpoSrcSet,
     url: "https://kth.diva-portal.org/smash/record.jsf?pid=diva2%3A1895800",
   },
   {
     id: 8,
-    title: "Real-time Texture Rendering Without UV Unwrapping (Ptex)",
+    title: "Real-time Texture Rendering Without UV Unwrapping",
+    role: "Author",
     date: "June 2022",
-    description: "My bachelor's thesis. Novel implementation of per-face texture mapping for real-time graphics applications without UV unwrapping.",
-    tags: ["C++", "OpenGL", "GLSL", "Graphics"],
-    icon: Monitor,
-    tone: "secondary",
+    description: "My bachelor's thesis. A novel implementation of per-face texture mapping (Ptex) for real-time graphics applications without UV unwrapping.",
     image: ptexImg,
     url: "https://www.diva-portal.org/smash/record.jsf?pid=diva2%3A1701157&dswid=-3287",
   },
@@ -244,9 +221,16 @@ const ProjectCard = ({ project }: ProjectCardProps) => {
             </h3>
           </div>
 
-          <p className={cn("text-sm sm:text-base md:text-lg text-foreground/70 font-medium")}>
-            {project.date}
-          </p>
+          <div className="flex items-center gap-3 flex-wrap">
+            <p className={cn("text-sm sm:text-base md:text-lg text-foreground/70 font-medium")}>
+              {project.date}
+            </p>
+            {project.role && (
+              <span className="text-xs sm:text-sm font-medium px-2.5 py-0.5 rounded-full bg-white/5 text-white/80 border border-white/10 whitespace-nowrap backdrop-blur-sm">
+                {project.role}
+              </span>
+            )}
+          </div>
 
           <div
             className={cn("grid grid-rows-[0fr] transition-[grid-template-rows] duration-500 delay-300 group-hover:grid-rows-[1fr] group-hover:delay-0 group-focus-within:grid-rows-[1fr] group-focus-within:delay-0 [will-change:grid-template-rows]")}
