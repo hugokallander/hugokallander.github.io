@@ -1,11 +1,5 @@
-import {
-  ChevronRight,
-  Shield,
-  Package,
-  Boxes,
-  Newspaper,
-  Monitor,
-} from "lucide-react";
+import { ChevronRight } from "lucide-react";
+import { useEffect, useState } from "react";
 
 // Responsive images with srcset for better performance & quality
 import secureDatasetSharingSrcSet from "@/assets/Secure_dataset_sharing.png?w=600;800;1200;1600&format=webp&as=srcset&quality=100";
@@ -34,6 +28,7 @@ import { cn } from "@/lib/utils";
 interface Project {
   id: number;
   title: string;
+  subtitle?: string;
   date: string;
   description: string;
   image?: string;
@@ -46,7 +41,8 @@ interface Project {
 const projects: Project[] = [
     {
       id: 0,
-      title: "RI-SCALE Model Hub: AI Agent & Model Sharing Platform",
+      title: "RI-SCALE Model Hub",
+      subtitle: "AI Agent & Model Sharing Platform",
       role: "Creator",
       date: "Since February 2026",
       description: "A centralized platform for sharing scientific AI agents and models, which I architected and built for the RI-SCALE European research initiative.",
@@ -56,7 +52,8 @@ const projects: Project[] = [
     },
     {
       id: 1,
-      title: "Safe Colab: AI-Protected Dataset Collaboration Platform",
+      title: "Safe Colab",
+      subtitle: "AI-Protected Dataset Collaboration Platform",
       role: "Creator",
       date: "Since November 2025",
       description: "A secure collaboration platform for sensitive datasets. I designed the architecture to guarantee privacy through AI-enforced access controls.",
@@ -66,7 +63,8 @@ const projects: Project[] = [
     },
     {
       id: 2,
-      title: "24Agents: AI Agent & Tool Research Repository",
+      title: "24Agents",
+      subtitle: "AI Agent & Tool Research Repository",
       role: "Creator",
       date: "Since September 2025",
       description: "A repository of zero-install, always-on AI agents and hundreds of scientific tools. I built the platform to democratize access to advanced research utilities.",
@@ -76,7 +74,8 @@ const projects: Project[] = [
     },
     {
       id: 3,
-      title: "PantheonOS: AI Data Scientist",
+      title: "PantheonOS",
+      subtitle: "AI Data Scientist",
       role: "Key Contributor",
       date: "August 2025",
       description: "An open-source ecosystem of scientific AI agents developed with Stanford. I engineered the critical communication layer using Hypha, enabling seamless agent interoperability.",
@@ -85,7 +84,8 @@ const projects: Project[] = [
     },
     {
       id: 4,
-      title: "File System-like Interface For Hypha Artifacts",
+      title: "Hypha Artifact",
+      subtitle: "Filesystem API for Hypha Artifacts",
       role: "Creator",
       date: "Since May 2025",
       description: "A filesystem-like Python library for interacting with Hypha artifacts. I built it for Pyodide installation and as an intuitive API for AI agents. 17,000 downloads on PyPi.",
@@ -94,7 +94,8 @@ const projects: Project[] = [
     },
     {
       id: 5,
-      title: "Vector Database Services for Hypha Ecosystem",
+      title: "Hypha Weaviate",
+      subtitle: "Vector Database Services for Hypha",
       role: "Creator",
       date: "Since March 2025",
       description: "AI-first integration of Weaviate into Hypha. I implemented fine-grained access control and virtual collections, enabling performant cell segmentation search.",
@@ -103,7 +104,8 @@ const projects: Project[] = [
     },
     {
       id: 6,
-      title: "Hypha: AI-First Data Management System",
+      title: "Hypha",
+      subtitle: "AI-First Data Management System",
       role: "Key Contributor",
       date: "Since September 2024",
       description: "A serverless application platform designed for scalable AI workflows. I engineer core backend services and frontend interfaces, ensuring robust data management for scientific applications.",
@@ -112,37 +114,52 @@ const projects: Project[] = [
       url: "https://hypha.aicell.io",
     },
     {
-    id: 7,
-    title: "Engaging News Article Title Generator using DPO",
-    role: "Author",
-    date: "June 2024",
-    description: "My master's thesis. In collaboration with the Norwegian newspaper Aftenposten, I fine-tuned a model to generate engaging article titles using Direct Preference Optimization (DPO).",
-    image: dpoImg,
-    srcSet: dpoSrcSet,
-    url: "https://kth.diva-portal.org/smash/record.jsf?pid=diva2%3A1895800",
-  },
-  {
-    id: 8,
-    title: "Real-time Texture Rendering Without UV Unwrapping",
-    role: "Author",
-    date: "June 2022",
-    description: "My bachelor's thesis. A novel implementation of per-face texture mapping (Ptex) for real-time graphics applications without UV unwrapping.",
-    image: ptexImg,
-    url: "https://www.diva-portal.org/smash/record.jsf?pid=diva2%3A1701157&dswid=-3287",
-  },
+      id: 7,
+      title: "DPO Titles",
+      subtitle: "Engaging News Article Title Generator using DPO",
+      role: "Author",
+      date: "June 2024",
+      description: "My master's thesis. In collaboration with the Norwegian newspaper Aftenposten, I fine-tuned a model to generate engaging article titles using Direct Preference Optimization (DPO).",
+      image: dpoImg,
+      srcSet: dpoSrcSet,
+      url: "https://kth.diva-portal.org/smash/record.jsf?pid=diva2%3A1895800",
+    },
+    {
+      id: 8,
+      title: "Ptex Traverse/Discard",
+      subtitle: "Real-time Texture Rendering Without UV Unwrapping",
+      role: "Author",
+      date: "June 2022",
+      description: "My bachelor's thesis. Two novel implementations of per-face texture mapping (Ptex) for real-time graphics applications without UV unwrapping.",
+      image: ptexImg,
+      url: "https://www.diva-portal.org/smash/record.jsf?pid=diva2%3A1701157&dswid=-3287",
+    },
 ];
 
 interface ProjectCardProps {
   project: Project;
+  isTouchDevice: boolean;
+  isTouchFocused: boolean;
+  onTouchFocus: (projectId: number) => void;
 }
 
-const ProjectCard = ({ project }: ProjectCardProps) => {
+const ProjectCard = ({
+  project,
+  isTouchDevice,
+  isTouchFocused,
+  onTouchFocus,
+}: ProjectCardProps) => {
+  const displayTitle = project.subtitle
+    ? `${project.title}: ${project.subtitle}`
+    : project.title;
   
   return (
     <div
       className={cn(
-        "group h-[22rem] sm:h-[26rem] block w-full transform-gpu transition-transform duration-700 ease-out active:scale-[0.96] focus:outline-none"
+        "group h-[22rem] sm:h-[26rem] block w-full transform-gpu transition-transform duration-700 ease-out active:scale-[0.96] focus:outline-none",
+        isTouchFocused && "is-touch-focused"
       )}
+      tabIndex={-1}
       onTouchStart={() => {}} // Enables hover state on touch devices
     >
       <div
@@ -156,16 +173,12 @@ const ProjectCard = ({ project }: ProjectCardProps) => {
           target="_blank"
           rel="noopener noreferrer"
           className="absolute inset-0 z-20 block cursor-pointer focus:outline-none"
-          aria-label={`View project: ${project.title}`}
+          aria-label={`View project: ${displayTitle}`}
           onClick={(e) => {
-             const isTouchDevice = globalThis.matchMedia('(hover: none)').matches;
-             if (isTouchDevice) {
-                const card = e.currentTarget.closest<HTMLElement>('.group');
-                if (card && document.activeElement !== card) {
-                  e.preventDefault();
-                  card.focus();
-                }
-             }
+            if (isTouchDevice && !isTouchFocused) {
+              e.preventDefault();
+              onTouchFocus(project.id);
+            }
           }}
         >
           <span className="sr-only">View Project</span>
@@ -191,7 +204,10 @@ const ProjectCard = ({ project }: ProjectCardProps) => {
             />
             <div
               aria-hidden="true"
-              className={cn("absolute inset-0 bg-black/10 transition-colors duration-700 delay-200 group-hover:bg-black/50 group-focus-within:bg-black/50")}
+              className={cn(
+                "absolute inset-0 bg-black/10 transition-colors duration-700 delay-200 group-hover:bg-black/50 group-focus-within:bg-black/50",
+                isTouchFocused && "bg-black/50"
+              )}
             />
             <div
               aria-hidden="true"
@@ -207,7 +223,12 @@ const ProjectCard = ({ project }: ProjectCardProps) => {
             "w-[2.7rem] h-[2.7rem]"
           )}
         >
-          <div className={cn("absolute w-full h-full bg-[linear-gradient(to_right,transparent_30%,rgba(255,255,255,0.05)_45%,rgba(255,255,255,0.05)_55%,transparent_70%)] -translate-x-[150%] group-hover:animate-shimmer-slide group-focus-within:animate-shimmer-slide")} />
+          <div
+            className={cn(
+              "absolute w-full h-full bg-[linear-gradient(to_right,transparent_30%,rgba(255,255,255,0.05)_45%,rgba(255,255,255,0.05)_55%,transparent_70%)] -translate-x-[150%] group-hover:animate-shimmer-slide group-focus-within:animate-shimmer-slide",
+              isTouchFocused && "animate-shimmer-slide"
+            )}
+          />
           <ChevronRight className="pl-[0.2rem] w-8 h-8 text-foreground relative z-10" />
         </div>
 
@@ -215,9 +236,14 @@ const ProjectCard = ({ project }: ProjectCardProps) => {
           <div className={cn("flex flex-wrap items-start justify-between gap-3 mb-1")}>
             <h3
               className={cn("text-lg sm:text-xl lg:text-3xl font-semibold text-foreground font-heading flex-1 min-w-0")}
-              data-text={project.title}
+              data-text={displayTitle}
             >
-              {project.title}
+              <span className="block text-white leading-tight">{project.title}</span>
+              {project.subtitle && (
+                <span className="mt-1 block text-sm sm:text-base lg:text-xl font-medium text-amber-100 leading-tight">
+                  {project.subtitle}
+                </span>
+              )}
             </h3>
           </div>
 
@@ -233,10 +259,18 @@ const ProjectCard = ({ project }: ProjectCardProps) => {
           </div>
 
           <div
-            className={cn("grid grid-rows-[0fr] transition-[grid-template-rows] duration-500 delay-300 group-hover:grid-rows-[1fr] group-hover:delay-0 group-focus-within:grid-rows-[1fr] group-focus-within:delay-0 [will-change:grid-template-rows]")}
+            className={cn(
+              "grid grid-rows-[0fr] transition-[grid-template-rows] duration-500 delay-300 group-hover:grid-rows-[1fr] group-hover:delay-0 group-focus-within:grid-rows-[1fr] group-focus-within:delay-0 [will-change:grid-template-rows]",
+              isTouchFocused && "grid-rows-[1fr] delay-0"
+            )}
           >
             <div className="overflow-hidden flex flex-col justify-end">
-              <p className={cn("text-sm sm:text-base md:text-lg lg:text-xl text-foreground/90 leading-relaxed mt-2 drop-shadow-md max-w-[90%] opacity-0 transition-opacity duration-300 delay-0 group-hover:opacity-100 group-hover:delay-500 group-focus-within:opacity-100 group-focus-within:delay-500 will-change-[opacity]")}>
+              <p
+                className={cn(
+                  "text-sm sm:text-base md:text-lg lg:text-xl text-foreground/90 leading-relaxed mt-2 drop-shadow-md max-w-[90%] opacity-0 transition-opacity duration-300 delay-0 group-hover:opacity-100 group-hover:delay-500 group-focus-within:opacity-100 group-focus-within:delay-500 will-change-[opacity]",
+                  isTouchFocused && "opacity-100 delay-500"
+                )}
+              >
                 {project.description}
               </p>
             </div>
@@ -248,6 +282,28 @@ const ProjectCard = ({ project }: ProjectCardProps) => {
 };
 
 const ProjectsSection = () => {
+  const [focusedProjectId, setFocusedProjectId] = useState<number | null>(null);
+  const [isTouchDevice, setIsTouchDevice] = useState(false);
+
+  useEffect(() => {
+    const mediaQuery = globalThis.matchMedia("(hover: none)");
+
+    const updateTouchState = () => {
+      const touchOnly = mediaQuery.matches;
+      setIsTouchDevice(touchOnly);
+      if (!touchOnly) {
+        setFocusedProjectId(null);
+      }
+    };
+
+    updateTouchState();
+    mediaQuery.addEventListener("change", updateTouchState);
+
+    return () => {
+      mediaQuery.removeEventListener("change", updateTouchState);
+    };
+  }, []);
+
   return (
     
     <section className="mb-8 pb-20 md:px-6">
@@ -260,7 +316,13 @@ const ProjectsSection = () => {
 
           <div className="grid grid-cols-1 xs:grid-cols-2 gap-3 xs:gap-4">
             {projects.map((project) => (
-              <ProjectCard key={project.id} project={project} />
+              <ProjectCard
+                key={project.id}
+                project={project}
+                isTouchDevice={isTouchDevice}
+                isTouchFocused={focusedProjectId === project.id}
+                onTouchFocus={setFocusedProjectId}
+              />
             ))}
           </div>
         </div>

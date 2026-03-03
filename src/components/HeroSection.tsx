@@ -1,7 +1,7 @@
 import { m } from "framer-motion";
 import { useState, useEffect } from "react";
 import type { ComponentType } from "react";
-import { GithubIcon, LinkedinIcon, Microscope } from "lucide-react";
+import { Mail, GithubIcon, LinkedinIcon, Microscope } from "lucide-react";
 
 // Workaround for framer-motion v12 type issues with React 18
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -89,6 +89,13 @@ const HeroSection = () => {
             transition={{ duration: 0.8, delay: 1 }}
             className="flex items-center justify-center gap-6 short:gap-4"
           >
+            <a
+              href="mailto:hugokallander@gmail.com"
+              className="text-muted-foreground hover:text-foreground transition-colors duration-300"
+            >
+              <Mail className="w-6 h-6 md:w-7 md:h-7 short:w-5 short:h-5" />
+              <span className="sr-only">Email Hugo</span>
+            </a>
             <a
               href="https://github.com/hugokallander"
               target="_blank"
