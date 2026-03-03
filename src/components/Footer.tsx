@@ -1,10 +1,17 @@
-import { Github, Linkedin, Microscope } from "lucide-react";
+import { Mail, Github, Linkedin, Microscope } from "lucide-react";
 
 const Footer = () => {
   return (
     <footer className="py-12 px-6">
 
       <div className="flex justify-center gap-8 mb-8">
+        <a
+          href="mailto:hugokallander@gmail.com"
+          className="text-muted-foreground hover:text-foreground transition-colors duration-300"
+        >
+          <Mail className="w-8 h-8" />
+          <span className="sr-only">Email Hugo</span>
+        </a>
         <a
           href="https://github.com/hugokallander"
           target="_blank"
