@@ -29,6 +29,9 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Lint
+        run: npm run lint
+
       - name: Build
         run: npm run build
 
@@ -59,9 +62,6 @@ jobs:
     permissions:
       pages: write
       id-token: write
-    environment:
-      name: github-pages-preview
-      url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - name: Deploy PR preview to GitHub Pages
         id: deployment
