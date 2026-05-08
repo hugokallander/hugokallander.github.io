@@ -8,8 +8,8 @@ import secureDatasetSharingImg from "@/assets/Secure_dataset_sharing.png?w=800&f
 import dpoSrcSet from "@/assets/dpo.png?w=600;800;1200;1600&format=webp&as=srcset&quality=100";
 import dpoImg from "@/assets/dpo.png?w=800&format=webp&quality=100"; // Fallback
 
-import bioengineSrcSet from "@/assets/startup.jpg?w=600;800;1200;1600&format=webp&as=srcset&quality=100";
-import bioengineImg from "@/assets/startup.jpg?w=800&format=webp&quality=100"; // Fallback
+import bioengineSrcSet from "@/assets/scilifelab-office.jpeg?w=600;800;1200;1600&format=webp&as=srcset&quality=100";
+import bioengineImg from "@/assets/scilifelab-office.jpeg?w=800&format=webp&quality=100"; // Fallback
 
 import ptexImg from "@/assets/ptex.png?w=800&format=webp";
 import startupImg from "@/assets/startup.jpg?w=800&format=webp";
