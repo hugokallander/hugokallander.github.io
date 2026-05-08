@@ -1,7 +1,7 @@
 import { m } from "framer-motion";
 import { useState, useEffect } from "react";
 import type { ComponentType } from "react";
-import { Mail, GithubIcon, LinkedinIcon, Microscope } from "lucide-react";
+import { Mail, GithubIcon, LinkedinIcon } from "lucide-react";
 
 // Workaround for framer-motion v12 type issues with React 18
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -59,17 +59,7 @@ const HeroSection = () => {
           >
             <span className="text-foreground">Hi, I'm Hugo,</span>
             <br />
-            <span className="text-foreground">PhD{" "}</span>
-            Student at
-            <br />
-            <a 
-              href="https://aicell.io/authors/hugodk/" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="gradient-text hover:drop-shadow-[0_0_15px_rgba(168,85,247,0.5)] duration-300 transition-all"
-            >
-              AICell Lab
-            </a>
+            <span className="gradient-text hover:drop-shadow-[0_0_15px_rgba(168,85,247,0.5)] duration-300 transition-all">AI engineer</span>
           </MotionH1>
 
           {/* Description */}
@@ -79,7 +69,7 @@ const HeroSection = () => {
             transition={{ duration: 0.8, delay: 0.7 }}
             className="text-lg md:text-xl lg:max-w-2xl text-muted-foreground/80 max-w-lg mx-auto leading-relaxed font-sans mb-10 short:text-base short:mb-6"
           >
-            Currently building the next generation of AI-powered tools for scientific discovery. Passionate about technologies that benefit society.
+            Passionate about AI and software engineering, with exciting projects on the way. Always building things that matter.
           </MotionP>
 
           {/* Social Links */}
@@ -113,15 +103,6 @@ const HeroSection = () => {
             >
               <LinkedinIcon className="w-6 h-6 md:w-7 md:h-7 short:w-5 short:h-5" />
               <span className="sr-only">LinkedIn</span>
-            </a>
-            <a
-              href="https://aicell.io/authors/hugodk/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-muted-foreground hover:text-foreground transition-colors duration-300"
-            >
-              <Microscope className="w-6 h-6 md:w-7 md:h-7 short:w-5 short:h-5" />
-              <span className="sr-only">AICell Lab Profile</span>
             </a>
           </MotionDiv>
         </MotionDiv>
