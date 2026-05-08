@@ -8,6 +8,9 @@ import secureDatasetSharingImg from "@/assets/Secure_dataset_sharing.png?w=800&f
 import dpoSrcSet from "@/assets/dpo.png?w=600;800;1200;1600&format=webp&as=srcset&quality=100";
 import dpoImg from "@/assets/dpo.png?w=800&format=webp&quality=100"; // Fallback
 
+import bioengineSrcSet from "@/assets/startup.jpg?w=600;800;1200;1600&format=webp&as=srcset&quality=100";
+import bioengineImg from "@/assets/startup.jpg?w=800&format=webp&quality=100"; // Fallback
+
 import ptexImg from "@/assets/ptex.png?w=800&format=webp";
 import startupImg from "@/assets/startup.jpg?w=800&format=webp";
 import artifactsImg from "@/assets/artifacts.jpg?w=800&format=webp";
@@ -46,7 +49,8 @@ const projects: Project[] = [
       role: "Co-author",
       date: "April 2026",
       description: "I co-authored a bioRxiv paper introducing BioEngine, a platform for scalable execution and adaptation of bioimage AI through agent-readable interfaces.",
-      image: startupImg,
+      image: bioengineImg,
+      srcSet: bioengineSrcSet,
       url: "https://www.biorxiv.org/content/10.64898/2026.04.19.719496v1",
     },
     {
