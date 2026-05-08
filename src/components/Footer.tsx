@@ -1,4 +1,4 @@
-import { Mail, Github, Linkedin, Microscope } from "lucide-react";
+import { Mail, Github, Linkedin } from "lucide-react";
 
 const Footer = () => {
   return (
@@ -29,15 +29,6 @@ const Footer = () => {
         >
           <Linkedin className="w-8 h-8" />
           <span className="sr-only">LinkedIn</span>
-        </a>
-        <a
-          href="https://aicell.io/authors/hugodk/"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-muted-foreground hover:text-foreground transition-colors duration-300"
-        >
-          <Microscope className="w-8 h-8" />
-          <span className="sr-only">AICell Lab Profile</span>
         </a>
       </div>
 
