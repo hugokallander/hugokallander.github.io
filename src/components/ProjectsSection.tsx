@@ -43,9 +43,10 @@ const projects: Project[] = [
       id: 9,
       title: "BioEngine",
       subtitle: "bioRxiv Paper on Agent-Readable Bioimage AI",
-      role: "Author",
+      role: "Co-author",
       date: "April 2026",
       description: "I co-authored a bioRxiv paper introducing BioEngine, a platform for scalable execution and adaptation of bioimage AI through agent-readable interfaces.",
+      image: "https://www.biorxiv.org/sites/default/files/biorxiv_logo_twitter_1200x630.png",
       url: "https://www.biorxiv.org/content/10.64898/2026.04.19.719496v1",
     },
     {
